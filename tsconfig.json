@@ -18,7 +18,27 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    //custom import
+    "baseUrl": "./src",
+    "paths": {
+      "assets": ["assets"],
+      "components": ["components"],
+      "layouts": ["components/layouts"],
+      "template": ["components/template"],
+      "ui": ["components/ui"],
+      "constant": ["constant"],
+      "contexts": ["contexts"],
+      "hooks": ["hooks"],
+      "libs": ["libs"],
+      "pages": ["pages"],
+      "routers": ["routers"],
+      "schemas": ["schemas"],
+      "services": ["services"],
+      "store": ["store"],
+      "types": ["types"],
+      "utils": ["utils"],
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

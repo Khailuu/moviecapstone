@@ -35,3 +35,10 @@ B2:
 install tailwind
 yarn add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
+
+yarn add react-router-dom
+
+hỗ trợ import directory 
+yarn add @types/node  
+yarn add react-hook-form
+yarn add zod @hookform/resolvers
