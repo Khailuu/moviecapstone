@@ -11,9 +11,13 @@ export const ThemeProvider = ({children}: Props) => {
         theme={{
             components: {
                 Button: {
-                    colorPrimary: 'red',
-                    colorPrimaryHover: 'red'
-                }
+                    // colorText: "white",
+                    // colorPrimaryTextHover:"white",
+                    // borderColorDisabled: "true",
+                    colorPrimary: '#72be43',
+                    colorPrimaryBgHover: '#61a138'
+                },
+                
             }
         }}
     >

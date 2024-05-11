@@ -17,7 +17,7 @@ export default defineConfig({
       components: path.resolve(__dirname, './src/components'),
       layouts: path.resolve(__dirname, './src/components/layouts'),
       template: path.resolve(__dirname, './src/components/template'),
-      ui: path.resolve(__dirname, './src/component/ui'),
+      ui: path.resolve(__dirname, './src/components/ui'),
       constant: path.resolve(__dirname, './src/constant'),
       contexts: path.resolve(__dirname, './src/contexts'),
       hooks: path.resolve(__dirname, './src/hooks'),

@@ -42,3 +42,18 @@ hỗ trợ import directory
 yarn add @types/node  
 yarn add react-hook-form
 yarn add zod @hookform/resolvers
+
+
+validation sử dụng zod => tạo schema
+
+extra reducer: xử lý bất đồng bộ
+
+middleware thunk
+
+mỗi service tạo ra 1 reducer
+
+getState === useSelector
+
+api get du lieu thuong tao folder api trong hooks
+
+skeleton

@@ -1,7 +1,9 @@
-import { HomeLayput } from 'components/layouts/HomeLayput'
+import { Hometemplate } from 'template'
 
 export const Home = () => {
   return (
-    <HomeLayput />
+    <div>
+        <Hometemplate />
+    </div>
   )
 }

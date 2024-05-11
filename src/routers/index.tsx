@@ -1,8 +1,7 @@
-import { AuthLayout } from 'layouts'
+import { AuthLayout, MainLayout } from 'layouts'
 import { PATH } from 'constant'
-import { Login, Register } from 'pages'
+import { Home, Login, Register } from 'pages'
 import { RouteObject, useRoutes } from 'react-router-dom'
-import { HomeLayput } from 'components/layouts/HomeLayput'
 
 
 
@@ -18,11 +17,17 @@ const router: RouteObject[] = [
                 path: PATH.register,
                 element: <Register />
             }
-        ]
+        ],
+        
     },
     {
-        element: <HomeLayput />,
-        path: PATH.home
+        element: <MainLayout />,
+        children: [
+            {
+                path: '/',
+                element: <Home />
+            }
+        ]
     }
     
 ]
