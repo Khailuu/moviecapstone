@@ -29,9 +29,11 @@ export const Header = () => {
                 Sign in
               </ButtonSignIn>
             </NavLink>
+            <NavLink to="/register">
             <ButtonSignUp className="self-center px-8  font-semibold rounded dark:bg-violet-600 dark:text-gray-50 ml-[15px]">
               Sign up
             </ButtonSignUp>
+            </NavLink>
           </div>
         </Fragment>
       );

@@ -51,7 +51,7 @@ export const RegisterTemplate = () => {
   }
   return ( 
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="text-[red] text-4xl font-[600] mb-[30px]">Register</h1>
+      <h1 className="text-[#72be43] text-4xl font-[600] mb-[30px]">Register</h1>
       <div className="text-white mb-[6px] fw-bold">Full Name</div>
       <Controller
         control={control}

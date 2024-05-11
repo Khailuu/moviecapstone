@@ -1,7 +1,8 @@
-import { Button, Card, Skeleton } from "antd";
+import { Card, Skeleton } from "antd";
 import { useGetPhimList } from "hooks/api";
 import { useState } from "react";
 import Slider from "react-slick";
+import '../../assets/button.css'
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -26,13 +27,16 @@ function SamplePrevArrow(props: any) {
 }
 
 export const Hometemplate = () => {
-  const [isShowingNow, setIsShowingNow] = useState(true);
+  const [activeButton, setActiveButton] = useState("showingNow")
+  const [isShowingNow, setIsShowingNow] = useState(true)
   const handleShowingNowClick = () => {
-    setIsShowingNow(true);
+    setIsShowingNow(true)
+    setActiveButton('showingNow');
   };
   
   const handleUpcomingClick = () => {
-    setIsShowingNow(false);
+    setIsShowingNow(false)
+    setActiveButton('upcoming')
   };
 
 
@@ -40,9 +44,9 @@ export const Hometemplate = () => {
   const { data: phimList, isFetching: isFetchingPhimList } = useGetPhimList();
   const filteredPhimList = phimList?.filter(phim => {
     if (isShowingNow) {
-      return phim.dangChieu === true;
+      return phim.dangChieu === true
     } else {
-      return phim.dangChieu === false;
+      return phim.dangChieu === false
     }
   });
   console.log(filteredPhimList)
@@ -119,6 +123,7 @@ export const Hometemplate = () => {
     className: "left",
     leftMode: true,
     infinite: true,
+    
     centerPadding: "0px",
     slidesToShow: 4,
     speed: 2000,
@@ -158,8 +163,8 @@ export const Hometemplate = () => {
 
   return (
     <div className="slider-container ">
-      <Button type="primary" className="mr-3 !h-[40px]"  onClick={handleShowingNowClick} >Phim đang chiếu</Button>
-      <Button type="primary" className="!h-[40px]" onClick={handleUpcomingClick}>Phim sắp chiếu</Button>
+      <button className={`mr-3 !h-[40px] ${activeButton === 'showingNow' ? 'active' : ''}`} onClick={handleShowingNowClick} >Phim đang chiếu</button>
+      <button className={`!h-[40px] ${activeButton === 'upcoming' ? 'active' : ''}`} onClick={handleUpcomingClick}>Phim sắp chiếu</button>
       <Slider {...settings}>
         {filteredPhimList?.map((phim) => {
           return (
@@ -173,7 +178,7 @@ export const Hometemplate = () => {
               className="!w-[90%] !my-[18px] !mx-3"
             >
               <Card.Meta title={phim.tenPhim} />
-              <Button type="primary">Detail</Button>
+              <button className="buy" >Buy Now</button>
             </Card>
           );
         })}
