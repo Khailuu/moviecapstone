@@ -23,7 +23,7 @@ export const LoginTemplate = () => {
     console.log(errors)
 
     const onSubmit: SubmitHandler<LoginType> = (values) => {
-      dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then((res)=> {
+      dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(()=> {
         toast.success('Login Success')
         navigate('/')
       })

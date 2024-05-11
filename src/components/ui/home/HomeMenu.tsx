@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Tabs } from "antd";
-import { useQuery } from "@tanstack/react-query";
-import { quanLyRapServices } from "services/qlr.services";
 import { useGetLichChieuHeThongRap } from "hooks/api/useGetLichChieuHeThongRap";
 
 type TabPosition = 'left' | 'right' | 'top' | 'bottom';

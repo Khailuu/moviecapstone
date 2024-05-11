@@ -1,8 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
 import { useGetBannerList } from "hooks/api";
-import { useQuery } from "@tanstack/react-query";
-import { quanLyPhimServices } from "services";
 const contentStyle: React.CSSProperties = {
   height: "800px",
   color: "#fff",

@@ -1,7 +1,7 @@
 import { LOCAL_USER_LOGIN_KEY } from "constant";
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink, Navigate } from "react-router-dom";
+import {  NavLink  } from "react-router-dom";
 import { RootState } from "store";
 import styled from "styled-components";
 

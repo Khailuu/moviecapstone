@@ -1,6 +1,6 @@
 import { Button, Card, Skeleton } from "antd";
 import { useGetPhimList } from "hooks/api";
-import React, { useState } from "react";
+import { useState } from "react";
 import Slider from "react-slick";
 
 function SampleNextArrow(props: any) {
