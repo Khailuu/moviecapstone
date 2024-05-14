@@ -4,7 +4,6 @@ import { useGetLichChieuHeThongRap } from "hooks/api/useGetLichChieuHeThongRap";
 import "../../../assets/custom.css";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
-import { qlDatVeServices } from "services";
 import { PATH } from "constant";
 import { useGetMaLichChieu } from "hooks/api";
 
