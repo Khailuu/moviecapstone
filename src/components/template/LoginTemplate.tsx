@@ -20,7 +20,7 @@ export const LoginTemplate = () => {
     } = useForm<LoginType>({
         resolver: zodResolver(loginSchema),
     })
-    console.log(errors)
+    console.log("userloginTemplate:",userLogin)
 
     const onSubmit: SubmitHandler<LoginType> = (values) => {
       dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(()=> {

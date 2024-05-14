@@ -12,8 +12,6 @@ export const apiInstance = {
                 },
             } as unknown as InternalAxiosRequestConfig
         })
-        console.log(api)
-
         return api
     },
 }

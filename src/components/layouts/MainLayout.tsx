@@ -1,17 +1,19 @@
-import { HomeMenu } from 'components/ui/home'
 import { Outlet } from 'react-router-dom'
-import { Footer, Header, HomeCarousel } from 'ui'
+import { Footer, Header } from 'ui'
+// import { useSelector } from "react-redux"
+// import { Navigate } from "react-router-dom"
+// import { RootState } from "store"
 
 export const MainLayout = () => {
+  // const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDung)
+  //   if(!userLogin) {
+  //       return <Navigate to='/login' />
+  //   }
   return (
-    <main className='main min-h-screen' style={{ backgroundColor: '#25293a'}}>
+    <main className='main min-h-screen flex flex-col' style={{ backgroundColor: '#25293a'}}>
         <Header />
-        <div className='mb-[80px]'>
-        <HomeCarousel />
-        </div>
-        <div className='mx-auto container'>
-          <Outlet />
-          <div className='container mx-auto mt-7 mb-7' style={{maxWidth: 1024}}><HomeMenu /></div>
+        <div className='flex-1'>
+        <Outlet />
         </div>
         <Footer />
     </main>

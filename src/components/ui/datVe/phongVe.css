@@ -1,0 +1,32 @@
+.ghe {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 35px;
+    color: black !important;
+    background-color: #fff;
+    border: #aff14d 1px solid; 
+    line-height: 35px;
+    text-align: center;
+  }
+
+  .gheDaDat {
+    background-color: rgb(255, 64, 0) !important;
+    cursor: no-drop !important;
+  }
+
+  .gheDangDat {
+    background-color: #aff14d !important;
+  }
+
+  .gheVip {
+    background-color: rgb(255, 196, 0);
+  }
+  .content{ 
+    width: 100%;
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr); /* Tạo 16 cột với độ rộng bằng nhau */
+    gap: 5px; /* Khoảng cách giữa các ghế */
+  }

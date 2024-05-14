@@ -1,6 +1,6 @@
 import { AuthLayout, MainLayout } from 'layouts'
 import { PATH } from 'constant'
-import { Home, Login, Register } from 'pages'
+import { DatVe, Home, Login, Register } from 'pages'
 import { RouteObject, useRoutes } from 'react-router-dom'
 
 
@@ -25,7 +25,11 @@ const router: RouteObject[] = [
         children: [
             {
                 path: '/',
-                element: <Home />
+                element: <Home />,
+            },
+            {
+                path: PATH.datVe ,
+                element:  <DatVe />
             }
         ]
     }

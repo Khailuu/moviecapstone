@@ -3,12 +3,22 @@ import { Tabs } from "antd";
 import { useGetLichChieuHeThongRap } from "hooks/api/useGetLichChieuHeThongRap";
 import "../../../assets/custom.css";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
+import { qlDatVeServices } from "services";
+import { PATH } from "constant";
+import { useGetMaLichChieu } from "hooks/api";
+
 type TabPosition = "left" | "right" | "top" | "bottom";
 
 export const HomeMenu = () => {
   const { data: rapList } = useGetLichChieuHeThongRap();
-  console.log(rapList);
   const [tabPosition] = useState<TabPosition>("left");
+  const handleItemClick = (maLichChieu?: number ) => {
+    console.log("maLichChieu", maLichChieu)
+    useGetMaLichChieu(maLichChieu)
+  };
+  
+ 
   return (
     <div>
       <>
@@ -30,7 +40,7 @@ export const HomeMenu = () => {
               >
                 <Tabs tabPosition={tabPosition}>
                   {rap.lstCumRap?.map((cumRap, i) => {
-                    const id = String(i + 1);
+                    
                     return (
                       <Tabs.TabPane
                         tab={
@@ -45,11 +55,11 @@ export const HomeMenu = () => {
                             </p>
                           </div>
                         }
-                        key={id}
+                        key={i}
                       >
-                        {cumRap.danhSachPhim?.map((phim) => {
+                        {cumRap.danhSachPhim?.map((phim, i) => {
                           return (
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex" }} key={i}>
                               <img
                                 src={phim.hinhAnh}
                                 style={{
@@ -60,22 +70,25 @@ export const HomeMenu = () => {
                                 alt="logophim"
                               />
                               <div className=" ml-[15px]">
-                                <h2
-                                  className="text-[#6bb140]"
+                                <NavLink to={'/datve'} 
+                                  className="!text-[#6bb140]"
                                   style={{ fontSize: 24, fontWeight: "bold" }}
                                 >
                                   {phim.tenPhim}
-                                </h2>
-                                <p className="text-white">{cumRap.diaChi}</p>
+                                </NavLink>
+                                <p className="text-[#bab9b9] mb-[10px]">{cumRap.diaChi}</p>
                                 <div className="grid grid-cols-6">
                                   {phim.lstLichChieuTheoPhim?.slice(0, 10).map(
-                                    (lichChieu: any) => {
+                                    (lichChieu: any, index:any) => {
                                       return (
-                                        <h2 className="text-[#86de4f] text-[20px] mr-[15px]">
+                                        <NavLink onClick={()=>{
+                                          handleItemClick(lichChieu.maLichChieu)
+                                  
+                                        }}  to={`${PATH.datVe}?MaLichChieu=${lichChieu.maLichChieu}`} className="!text-[#86de4f] text-[20px] mr-[15px]" key={index}>
                                           {moment(
                                             lichChieu.ngayChieuGioChieu
                                           ).format("HH:mm")}
-                                        </h2>
+                                        </NavLink>
                                       );
                                     }
                                   )}

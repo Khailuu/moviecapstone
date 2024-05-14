@@ -1,11 +1,14 @@
-import { LOCAL_USER_LOGIN_KEY } from "constant";
+import { LOCAL_USER_LOGIN_KEY, PATH } from "constant";
 import { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import {  NavLink  } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RootState } from "store";
+import { quanLyNguoiDungAction } from "store/quanLyNguoiDung/slice";
 import styled from "styled-components";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { userLogin } = useSelector(
     (state: RootState) => state.quanLyNguoiDung
   );
@@ -17,6 +20,9 @@ export const Header = () => {
 
   const removeUserLogin = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY);
+    dispatch(quanLyNguoiDungAction.updateUserLogin(null)); // dispatch action để cập nhật userLogin thành null
+    setIsLoggedIn(false); // cập nhật trạng thái isLoggedIn
+    navigate("/login");
   };
 
   const renderLogin = () => {
@@ -24,15 +30,15 @@ export const Header = () => {
       return (
         <Fragment>
           <div className="items-center flex-shrink-0 hidden text-white lg:flex">
-            <NavLink to="/login">
+            <NavLink to={PATH.login}>
               <ButtonSignIn className="self-center px-8 rounded ">
                 Sign in
               </ButtonSignIn>
             </NavLink>
-            <NavLink to="/register">
-            <ButtonSignUp className="self-center px-8  font-semibold rounded dark:bg-violet-600 dark:text-gray-50 ml-[15px]">
-              Sign up
-            </ButtonSignUp>
+            <NavLink to={PATH.register}>
+              <ButtonSignUp className="self-center px-8  font-semibold rounded dark:bg-violet-600 dark:text-gray-50 ml-[15px]">
+                Sign up
+              </ButtonSignUp>
             </NavLink>
           </div>
         </Fragment>
@@ -44,23 +50,25 @@ export const Header = () => {
           <span className="text-white">
             Welcome, <span style={{ color: "#60b648" }}>{userLogin.hoTen}</span>
           </span>
-            <span
-              className="text-white"
-              onClick={() => {
-                removeUserLogin();
-              }}
-            >
-              Log Out
-            </span>
-        
+          <span
+            className="text-white"
+            onClick={() => {
+              removeUserLogin();
+            }}
+          >
+            Log Out
+          </span>
         </Fragment>
       );
     }
   };
-
+  console.log("userLoginHome: ",userLogin)
 
   return (
-    <header className="p-4 dark:bg-gray-100 dark:text-gray-800 p-7 fixed z-10 w-full bg-opacity-50 bg-black">
+    <header
+      style={{ top: 0 }}
+      className=" dark:bg-gray-100 dark:text-gray-800 p-7 sticky z-10 w-full bg-opacity-50 bg-black"
+    >
       <div className="container flex justify-between h-16 mx-auto">
         <a
           rel="noopener noreferrer"
@@ -76,40 +84,32 @@ export const Header = () => {
         </a>
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
-            <a
+            <NavLink
+            style={{background: "none"}}
+              to={"/"}
               rel="noopener noreferrer"
-              href="#"
               className="flex items-center px-4 -mb-1 text-white "
             >
-              Link
-            </a>
+              Home
+            </NavLink>
           </li>
           <li className="flex">
-            <a
+            <NavLink
+              to={"/contact"}
               rel="noopener noreferrer"
-              href="#"
               className="flex items-center px-4 -mb-1 text-white "
             >
-              Link
-            </a>
+              Contact
+            </NavLink>
           </li>
           <li className="flex">
-            <a
+            <NavLink
+              to={"/news"}
               rel="noopener noreferrer"
-              href="#"
               className="flex items-center px-4 -mb-1 text-white "
             >
-              Link
-            </a>
-          </li>
-          <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="flex items-center px-4 -mb-1 text-white"
-            >
-              Link
-            </a>
+              News
+            </NavLink>
           </li>
         </ul>
         {renderLogin()}
