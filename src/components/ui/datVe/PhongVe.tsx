@@ -1,6 +1,6 @@
 import { useGetMaLichChieu } from "hooks/api";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { RootState } from "store";
 import style from "./phongVe.module.css";
 import { QuanLyDatVe } from "types";
