@@ -28,7 +28,7 @@ const router: RouteObject[] = [
                 element: <Home />,
             },
             {
-                path: PATH.datVe ,
+                path: `${PATH.datVe}/:maLichChieu`,
                 element:  <DatVe />
             }
         ]

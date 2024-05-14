@@ -7,7 +7,6 @@ const api = apiInstance.create({
 
 export const qlDatVeServices = {
     layDanhSachPhongVe: (MALICHCHIEU?: number) => {
-        console.log("MALICHCHIEU",MALICHCHIEU)
         return  api.get<HttpResponse<QuanLyDatVe>>(`/LayDanhSachPhongVe?MaLichChieu=${MALICHCHIEU}`)
     }
 }

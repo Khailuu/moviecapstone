@@ -1,6 +1,6 @@
 import { useGetMaLichChieu } from "hooks/api";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { RootState } from "store";
 import style from "./phongVe.module.css";
 import { QuanLyDatVe } from "types";
@@ -11,10 +11,15 @@ import { CloseOutlined } from "@ant-design/icons";
 
 export const PhongVe = () => {
   // get mã lịch chiếu từ url
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const malichchieu = searchParams.get("MaLichChieu");
-  
+  const { maLichChieu } = useParams<{ maLichChieu: string }>();
+
+  // Kiểm tra nếu maLichChieu là undefined và xử lý nó
+  if (!maLichChieu) {
+    return <div>Không có mã lịch chiếu.</div>;
+  }
+
+  const malichchieu = parseInt(maLichChieu, 10);
+  console.log(maLichChieu)
   const dispatch = useDispatch()
   const { cartList } = useSelector((state: RootState) => state.quanLyNguoiDung)
   const { userLogin } = useSelector(

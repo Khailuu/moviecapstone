@@ -81,9 +81,9 @@ export const HomeMenu = () => {
                                     (lichChieu: any, index:any) => {
                                       return (
                                         <NavLink onClick={()=>{
-                                          handleItemClick(lichChieu.maLichChieu)
+                                        handleItemClick(lichChieu.maLichChieu)
                                   
-                                        }}  to={`${PATH.datVe}?MaLichChieu=${lichChieu.maLichChieu}`} className="!text-[#86de4f] text-[20px] mr-[15px]" key={index}>
+                                        }}  to={`${PATH.datVe}/${lichChieu.maLichChieu}`} className="!text-[#86de4f] text-[20px] mr-[15px]" key={index}>
                                           {moment(
                                             lichChieu.ngayChieuGioChieu
                                           ).format("HH:mm")}
