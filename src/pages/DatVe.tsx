@@ -3,7 +3,7 @@ import { PhongVe } from 'components/ui/datVe';
 import { KetQuaDatVe } from 'components/ui/datVe/KetQuaDatVe';
 import { useAuth } from 'hooks';
 import { useEffect } from 'react';
-import { unstable_HistoryRouter, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledTabs = styled(Tabs)`
