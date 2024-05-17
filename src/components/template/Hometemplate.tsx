@@ -3,6 +3,9 @@ import { useGetPhimList } from "hooks/api";
 import { useState } from "react";
 import Slider from "react-slick";
 import '../../assets/button.css'
+import { generatePath, useNavigate } from "react-router-dom";
+import { PATH } from "constant";
+import { useAuth } from "hooks";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -27,6 +30,7 @@ function SamplePrevArrow(props: any) {
 }
 
 export const Hometemplate = () => {
+  const navigate = useNavigate()
   const [activeButton, setActiveButton] = useState("showingNow")
   const [isShowingNow, setIsShowingNow] = useState(true)
   const handleShowingNowClick = () => {
@@ -39,6 +43,8 @@ export const Hometemplate = () => {
     setActiveButton('upcoming')
   };
 
+  const {userLogin } = useAuth()
+  console.log(userLogin)
 
   
   const { data: phimList, isFetching: isFetchingPhimList } = useGetPhimList();
@@ -167,6 +173,7 @@ export const Hometemplate = () => {
       <button className={`!h-[40px] ${activeButton === 'upcoming' ? 'active_button' : ''}`} onClick={handleUpcomingClick}>Phim sắp chiếu</button>
       <Slider {...settings}>
         {filteredPhimList?.map((phim) => {
+          
           return (
             <Card
             key={phim.maPhim}
@@ -178,7 +185,9 @@ export const Hometemplate = () => {
               className="!w-[90%] !my-[18px] !mx-3"
             >
               <Card.Meta title={phim.tenPhim} />
-              <button className="buy" >Buy Now</button>
+              <button onClick={()=> {
+                navigate(generatePath(PATH.movieDetail, { movieId: phim.maPhim }))
+              }} className="buy" >Chi Tiết</button>
             </Card>
           );
         })}

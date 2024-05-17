@@ -40,6 +40,6 @@
       "utils": ["utils"],
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/components/ui/admin/films/.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

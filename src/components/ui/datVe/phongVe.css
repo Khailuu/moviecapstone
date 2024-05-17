@@ -30,3 +30,8 @@
     grid-template-columns: repeat(16, 1fr); /* Tạo 16 cột với độ rộng bằng nhau */
     gap: 5px; /* Khoảng cách giữa các ghế */
   }
+
+  .gheDuocMinhDat {
+    background-color: rgb(229, 151, 255) !important;
+    box-shadow: -1px 2px 18px 0px #fff;
+  }

@@ -1,3 +1,5 @@
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Divider, Popover } from "antd";
 import { LOCAL_USER_LOGIN_KEY, PATH } from "constant";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +26,7 @@ export const Header = () => {
     setIsLoggedIn(false); // cập nhật trạng thái isLoggedIn
     navigate("/login");
   };
+  // const [open, setOpen] = useState(false)
 
   const renderLogin = () => {
     if (!isLoggedIn) {
@@ -32,34 +35,90 @@ export const Header = () => {
           <div className="items-center flex-shrink-0 hidden text-white lg:flex">
             <NavLink to={PATH.login}>
               <ButtonSignIn className="self-center px-8 rounded ">
-                Sign in
+                Đăng Nhập
               </ButtonSignIn>
             </NavLink>
             <NavLink to={PATH.register}>
               <ButtonSignUp className="self-center px-8  font-semibold rounded dark:bg-violet-600 dark:text-gray-50 ml-[15px]">
-                Sign up
+                Đăng Ký
               </ButtonSignUp>
             </NavLink>
           </div>
         </Fragment>
       );
     }
-    if (userLogin && userLogin.hoTen) {
-      return (
-        <Fragment>
-          <span className="text-white">
-            Welcome, <span style={{ color: "#60b648" }}>{userLogin.hoTen}</span>
-          </span>
-          <span
-            className="text-white"
-            onClick={() => {
-              removeUserLogin();
-            }}
-          >
-            Log Out
-          </span>
-        </Fragment>
-      );
+    if (userLogin && userLogin.hoTen ) {
+      switch(userLogin.maLoaiNguoiDung) {
+        case "KhachHang": return (
+        
+          <Fragment>
+            <Popover
+            
+            content={
+                <div>
+                    <Button
+                        type="text"
+                        onClick={() => {
+                            navigate(PATH.userInfo)
+                        }}
+                    >
+                        Thông tin tài khoản
+                    </Button>
+                    <Divider className="py-10" />
+                    <Button
+                        type="primary"
+                        danger
+                        onClick={() => {
+                          removeUserLogin();
+                        }}
+                    >
+                        Đăng xuất
+                    </Button>
+                </div>
+            }>
+  
+            <span className="text-white">
+              Xin Chào, <span style={{ color: "#60b648" }}><Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} /> {userLogin.hoTen}</span>
+            </span>
+            </Popover>
+          </Fragment>
+        );
+        case "QuanTri": return (
+        
+          <Fragment>
+            <Popover
+            
+            content={
+                <div>
+                    <Button
+                        type="text"
+                        onClick={() => {
+                            navigate(PATH.admin)
+                        }}
+                    >
+                        Quản lý
+                    </Button>
+                    <Divider className="py-10" />
+                    <Button
+                        type="primary"
+                        danger
+                        onClick={() => {
+                          removeUserLogin();
+                        }}
+                    >
+                        Đăng xuất
+                    </Button>
+                </div>
+            }>
+  
+            <span className="text-white">
+              Xin Chào, <span style={{ color: "#60b648" }}><Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} /> {userLogin.hoTen}</span>
+            </span>
+            </Popover>
+          </Fragment>
+        );
+      }
+      
     }
   };
   console.log("userLoginHome: ",userLogin)
@@ -90,7 +149,7 @@ export const Header = () => {
               rel="noopener noreferrer"
               className="flex items-center px-4 -mb-1 text-white "
             >
-              Home
+              Trang Chủ
             </NavLink>
           </li>
           <li className="flex">
@@ -99,7 +158,7 @@ export const Header = () => {
               rel="noopener noreferrer"
               className="flex items-center px-4 -mb-1 text-white "
             >
-              Contact
+              Liên Hệ
             </NavLink>
           </li>
           <li className="flex">
@@ -108,7 +167,7 @@ export const Header = () => {
               rel="noopener noreferrer"
               className="flex items-center px-4 -mb-1 text-white "
             >
-              News
+              Tin Tức
             </NavLink>
           </li>
         </ul>

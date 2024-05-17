@@ -1,9 +1,9 @@
-//rafc
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Input } from 'antd'
+import { PATH } from 'constant'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate, Navigate, NavLink } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { LoginType, loginSchema } from 'schemas'
 import { RootState, useAppDispatch } from 'store'
@@ -20,25 +20,33 @@ export const LoginTemplate = () => {
     } = useForm<LoginType>({
         resolver: zodResolver(loginSchema),
     })
-    console.log("userloginTemplate:",userLogin)
+    console.log("userloginTemplate:", userLogin)
 
     const onSubmit: SubmitHandler<LoginType> = (values) => {
-      dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(()=> {
-        toast.success('Login Success')
-        navigate('/')
-      })
-      .catch((err) => {
-        toast.error(err?.response?.data?.content)
-      })
+        dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(() => {
+            toast.success('Login Success')
+            if (userLogin?.maLoaiNguoiDung === 'QuanTri') {
+                navigate('/admin')
+            } else if (userLogin?.maLoaiNguoiDung === 'KhachHang') {
+                navigate('/')
+            }
+        })
+        .catch((err) => {
+            toast.error(err?.response?.data?.content)
+        })
     }
-    if(userLogin) {
-        return <Navigate to='/' />
+
+    if (userLogin) {
+        if (userLogin.maLoaiNguoiDung === 'QuanTri') {
+            return <Navigate to='/admin' />
+        } else if (userLogin.maLoaiNguoiDung === 'KhachHang') {
+            return <Navigate to='/' />
+        }
     }
 
     return (
         <form className="text-white" onSubmit={handleSubmit(onSubmit)}>
-                  <h1 className="text-[#72be43] text-4xl font-[600] mb-[30px]">Login</h1>
-
+            <h1 className="text-[#72be43] text-4xl font-[600] mb-[30px]">Login</h1>
 
             <div className="mt-20">
                 <p className="mb-10">User Name</p>
@@ -64,9 +72,14 @@ export const LoginTemplate = () => {
             </div>
 
             <div className="text-center mt-20">
-                <Button  loading={isFetchingLogin} htmlType="submit" style={{backgroundColor: "#72be43", border:"none"}} size='large' className='!text-white w-[100%]' >
-                    Login
+                <Button loading={isFetchingLogin} htmlType="submit" style={{ backgroundColor: "#72be43", border: "none" }} size='large' className='!text-white w-[100%]'>
+                    Đăng Nhập
                 </Button>
+                <div className='mt-[15px]'>
+                    <NavLink to={PATH.register}>
+                        Bạn chưa có tài khoản ?
+                    </NavLink>
+                </div>
             </div>
         </form>
     )

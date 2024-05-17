@@ -1,3 +1,5 @@
 export * from './LoginTemplate'
 export * from './RegisterTemplate'
 export * from './Hometemplate'
+export * from './MovieDetailTemplate'
+export * from './AdminTemplate'

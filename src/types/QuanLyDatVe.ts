@@ -26,3 +26,8 @@ export type Ghe = {
   taiKhoanNguoiDat: string;
   tenGhe: string;
 };
+
+export type ThongTinDatVe = {
+  maLichChieu: number;
+  danhSachVe: any[]; // specify the type of items if possible
+}

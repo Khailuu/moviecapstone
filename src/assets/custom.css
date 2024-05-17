@@ -2,3 +2,10 @@
     position: sticky;
     top: 80px;
   }
+
+.ant-layout.ant-layout-has-sider {
+  height: 100vh;
+}
+.anticon {
+  color: red
+}

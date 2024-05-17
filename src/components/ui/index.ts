@@ -1,3 +1,6 @@
 export * from './Footer'
 export * from './Header'
 export * from './HomeCarousel'
+export * from './TabUserInfo'
+export * from './TicketInfo'
+export * from './HomeCarousel'

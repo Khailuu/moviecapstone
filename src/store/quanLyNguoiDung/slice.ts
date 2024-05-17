@@ -10,7 +10,8 @@ const initialState = {
     isFetchingRegister: false,
     isFetchingLogin: false,
     userLogin: getUserLogin(),
-    cartList: [] as Ghe[]
+    cartList: [] as Ghe[],
+    userInfo: {}
 }
 
 export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  } = createSlice({
@@ -33,6 +34,9 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  
                 state.cartList.push(action.payload)
                 console.log("cart: ",state.cartList)
             }
+        },
+        clearCart: (state) => {
+            state.cartList = [];
         },
         updateUserLogin: (state, action) => {
             state.userLogin = action.payload;

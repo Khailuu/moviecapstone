@@ -1,3 +1,5 @@
 export * from './useGetPhimList'
 export * from  './useGetBannerList'
 export * from  './useGetMaLichChieu'
+export * from  './useGetUserInfo'
+export * from  './useGetLichChieuHeThongRap'
