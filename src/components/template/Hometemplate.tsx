@@ -55,7 +55,6 @@ export const Hometemplate = () => {
       return phim.dangChieu === false
     }
   });
-  // console.log(filteredPhimList)
   // skeleton 
   if (isFetchingPhimList) {
     const settings = {
@@ -169,8 +168,8 @@ export const Hometemplate = () => {
 
   return (
     <div className="slider-container ">
-      <button className={`mr-3 !h-[40px] ${activeButton === 'showingNow' ? 'active_button' : ''}`} onClick={handleShowingNowClick} >Phim đang chiếu</button>
-      <button className={`!h-[40px] ${activeButton === 'upcoming' ? 'active_button' : ''}`} onClick={handleUpcomingClick}>Phim sắp chiếu</button>
+      <button className={`mr-3 !h-[40px] custom ${activeButton === 'showingNow' ? 'active_button' : ''}`} onClick={handleShowingNowClick} >Phim đang chiếu</button>
+      <button className={`!h-[40px] custom ${activeButton === 'upcoming' ? 'active_button' : ''}`} onClick={handleUpcomingClick}>Phim sắp chiếu</button>
       <Slider {...settings}>
         {filteredPhimList?.map((phim) => {
           

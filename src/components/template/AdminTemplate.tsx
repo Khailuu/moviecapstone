@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DesktopOutlined, FileOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { LOCAL_USER_LOGIN_KEY, PATH } from "constant";
 import { useDispatch } from "react-redux";
 import { quanLyNguoiDungAction } from "store/quanLyNguoiDung/slice";
-import SubMenu from "antd/es/menu/SubMenu";
 
 const { Header, Content, Footer, Sider } = Layout;
-
+const { SubMenu } = Menu;
 
 export const AdminTemplate = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [collapsed] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
   const themeToken = theme.useToken();
   const {
     token: { colorBgContainer = '#fff', borderRadiusLG = '4px' } = {}
@@ -21,36 +21,48 @@ export const AdminTemplate = () => {
 
   const removeUserLogin = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY);
-    dispatch(quanLyNguoiDungAction.updateUserLogin(null)); // dispatch action để cập nhật userLogin thành null
+    dispatch(quanLyNguoiDungAction.updateUserLogin(null)); 
     navigate("/login");
   };
+
+  const getSelectedKeys = (pathname: any) => {
+    if (pathname.startsWith(PATH.showtime)) {
+      return [PATH.showtime];
+    }
+    return [pathname];
+  };
+
+  const [selectedKeys, setSelectedKeys] = useState(getSelectedKeys(location.pathname));
+
+  useEffect(() => {
+    setSelectedKeys(getSelectedKeys(location.pathname));
+  }, [location.pathname]);
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider collapsible collapsed={collapsed}>
+      <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" >
-          <Menu.Item key='1' icon={<UserOutlined />}>
+        <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
+          <Menu.Item key={PATH.dashboard} icon={<UserOutlined />}>
             <NavLink to={PATH.dashboard}>Users</NavLink>
           </Menu.Item>
           <SubMenu key='sub1' icon={<FileOutlined />} title="Films">
-            <Menu.Item key="5" icon={<FileOutlined />}>
+            <Menu.Item key={PATH.films}>
               <NavLink to={PATH.films}>Films</NavLink>
             </Menu.Item>
-            <Menu.Item key='6' icon={<FileOutlined />}>
+            <Menu.Item key={PATH.addFilms}>
               <NavLink to={PATH.addFilms}>Add Films</NavLink>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key='2' icon={<DesktopOutlined />}>
-              <NavLink to={PATH.showtime}>Showtime</NavLink>
-            </Menu.Item>
+          <Menu.Item key={PATH.showtime} icon={<DesktopOutlined />}>
+            <NavLink to={PATH.showtime}>Showtime</NavLink>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer, marginBottom: 20 }}>
           <div className="flex items-center">
-            <Button onClick={() => {
-                        removeUserLogin();
-                      }} type="primary" className="ms-auto" danger>
+            <Button onClick={removeUserLogin} type="primary" className="ms-auto" danger>
               Đăng xuất
             </Button>
           </div>

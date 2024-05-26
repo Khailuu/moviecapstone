@@ -9,6 +9,7 @@ import { Ghe } from "types";
 const initialState = {
     isFetchingRegister: false,
     isFetchingLogin: false,
+    isFetchingUpload: false,
     userLogin: getUserLogin(),
     cartList: [] as Ghe[],
     userInfo: {}
@@ -27,7 +28,6 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  
             const index = state.cartList.findIndex((gheDD) => {
                 return gheDD.maGhe === action.payload.maGhe
             })
-            console.log(index)
             if(index !== -1) {
                 state.cartList.splice(index,1)
             }else {
@@ -52,7 +52,6 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  
             state.isFetchingRegister = false
         })
         .addCase(quanLyNguoiDungActionThunks.registerThunk.rejected,(state, action) => {
-            console.log('action', action)
             state.isFetchingRegister = false
         })
 
@@ -68,8 +67,17 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  
             state.userLogin = payload
         })
         .addCase(quanLyNguoiDungActionThunks.loginThunk.rejected,(state, action) => {
-            console.log('action', action)
             state.isFetchingLogin = false
+        })
+
+        .addCase(quanLyNguoiDungActionThunks.uploadThunk.pending,(state) => {
+            state.isFetchingUpload = true
+        })
+        .addCase(quanLyNguoiDungActionThunks.uploadThunk.fulfilled,(state) => {
+            state.isFetchingUpload = false
+        })
+        .addCase(quanLyNguoiDungActionThunks.uploadThunk.rejected,(state) => {
+            state.isFetchingUpload = false
         })
     }
 })

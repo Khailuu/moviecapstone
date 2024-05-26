@@ -32,8 +32,13 @@ const router: RouteObject[] = [
                 element: <Home />,
             },
             {
-                path: `${PATH.datVe}/:maLichChieu`,
-                element:  <DatVe />
+                path: `${PATH.datVe}`,
+                element:  <DatVe />,
+                children: [
+                    {
+                        path: `${PATH.datVe}/:maLichChieu`
+                    }
+                ]
             },
             {
                 path: PATH.userInfo,
@@ -64,8 +69,13 @@ const router: RouteObject[] = [
                 element: <AddFilms />
             },
             {
-                path: PATH.showtime,
-                element: <Showtime />
+                path: `${PATH.showtime}`,
+                element: <Showtime />,
+                children: [
+                    {
+                        path:`${PATH.showtime}/:maPhim`
+                    }
+                ]
             }
         ]
     }

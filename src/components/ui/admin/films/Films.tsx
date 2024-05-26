@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import { Input } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
@@ -6,6 +6,8 @@ import { useGetPhimList } from "hooks/api";
 import { DeleteOutlined, EditOutlined, FormOutlined } from "@ant-design/icons";
 import { useDeletePhim } from "hooks/api/useDeletePhim";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
+import { PATH } from "constant";
 const { Search } = Input;
 const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
@@ -73,7 +75,11 @@ export const Films = () => {
         return (
           <div>
             <EditOutlined className="mr-[15px]" style={{color: "blue"}} />
-            <FormOutlined className="mr-[15px]" style={{color: "green"}} />
+              <NavLink to={`${PATH.showtime}/${film.maPhim}`}>
+                <FormOutlined className="mr-[15px]" style={{color: "green"}} onClick={() =>{
+                  console.log(film.maPhim)
+                }}/>
+              </NavLink>
             <DeleteOutlined onClick={() => {
               mutation.mutate(film.maPhim)
               toast.success("Xoá Thành Công!")
@@ -114,8 +120,13 @@ export const Films = () => {
       enterButton="Search"
       size="large"
       onSearch={onSearch}
-      className="mb-[30px]"
+      className="mb-[20px]"
     />
+    <NavLink to={PATH.addFilms}>
+    <Button className="!text-[#90c63f] mb-[30px]">
+        Add New
+    </Button>
+    </NavLink>
       <Table
         columns={columns}
         dataSource={data}

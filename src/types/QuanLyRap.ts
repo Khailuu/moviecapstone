@@ -23,3 +23,16 @@ export type phim = {
   tenPhim: string;
 };
 
+export type HeThongRap = {
+  maHeThongRap: string;
+  tenHeThongRap: string;
+  biDanh: string;
+  logo: string
+}
+
+export type CumRap = {
+  maCumRap: string;
+  tenCumRap: string;
+  diaChi: string;
+  danhSachRap: []
+}

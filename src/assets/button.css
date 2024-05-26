@@ -7,7 +7,7 @@
     transition: all .5s ease-in-out;
 }
 
-button {
+button.custom {
     border: 1px solid #72BE43;
     width: 160px;
     border-radius: 5px;
@@ -29,6 +29,6 @@ button:hover .buy {
     background-color: #619e3a;
 } 
 
-button:hover {
+button.custom:hover {
     background-color: #619e3a;
 }

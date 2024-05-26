@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LoginType, RegisterType } from "schemas";
-import { qlNguoiDungServices } from "services";
+import { qlNguoiDungServices, quanLyPhimServices } from "services";
 import { sleep } from "utils";
 
 // quản lý bất đồng bộ
@@ -25,6 +25,18 @@ async (payload: LoginType, {rejectWithValue}) => {
         const res = await qlNguoiDungServices.dangNhap(payload)
         return res.data.content
     } catch (err) {
+        return rejectWithValue(err)
+    }
+}
+)
+
+export const uploadThunk = createAsyncThunk('ThemPhimUploadHinh',
+async (payload: FormData, {rejectWithValue}) => {
+    try {
+        const res = await quanLyPhimServices.uploadPhim(payload)
+        console.log(res)
+    }
+    catch(err) {
         return rejectWithValue(err)
     }
 }

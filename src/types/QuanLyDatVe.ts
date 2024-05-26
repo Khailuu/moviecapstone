@@ -31,3 +31,10 @@ export type ThongTinDatVe = {
   maLichChieu: number;
   danhSachVe: any[]; // specify the type of items if possible
 }
+
+export type TaoLichChieu = {
+  maPhim: number
+  ngayChieuGioChieu: string
+  maRap: string
+  giaVe: number
+}

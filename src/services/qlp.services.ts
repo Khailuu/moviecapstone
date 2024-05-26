@@ -6,7 +6,12 @@ const api = apiInstance.create({
 })
 
 export const quanLyPhimServices = {
-    getPhimList: () => api.get<HttpResponse<Phim[]>>('/LayDanhSachPhim'),
+    getPhimList: () => api.get<HttpResponse<Phim[]>>('/LayDanhSachPhim?maNhom=gp03'),
     getBannerList: () => api.get<HttpResponse<Banner[]>>('/LayDanhSachBanner'),
-    deletePhim: (maPhim: number) => api.delete(`/XoaPhim?=${maPhim}`)
+    getThongTinPhim: (maPhim: number) => api.get<HttpResponse<Phim>>(`LayThongTinPhim?MaPhim=${maPhim}`),
+    deletePhim: (maPhim: number) => api.delete(`/XoaPhim?=${maPhim}`),
+    uploadPhim: (formGroup: FormData) => {
+        console.log(formGroup)
+        return api.post<HttpResponse<FormData[]>>('ThemPhimUploadHinh', formGroup)
+    }
 }
