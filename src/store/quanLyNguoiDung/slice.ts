@@ -51,7 +51,7 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  
         .addCase(quanLyNguoiDungActionThunks.registerThunk.fulfilled,(state) => {
             state.isFetchingRegister = false
         })
-        .addCase(quanLyNguoiDungActionThunks.registerThunk.rejected,(state, action) => {
+        .addCase(quanLyNguoiDungActionThunks.registerThunk.rejected,(state) => {
             state.isFetchingRegister = false
         })
 
@@ -66,7 +66,7 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction  
             // set lai thong tin ueser login
             state.userLogin = payload
         })
-        .addCase(quanLyNguoiDungActionThunks.loginThunk.rejected,(state, action) => {
+        .addCase(quanLyNguoiDungActionThunks.loginThunk.rejected,(state) => {
             state.isFetchingLogin = false
         })
 
