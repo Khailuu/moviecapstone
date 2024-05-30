@@ -79,7 +79,8 @@ export const AddFilms = () => {
       if (values.hinhAnh) {
         formData.append('hinhAnh', values.hinhAnh, values.hinhAnh.name);
       }
-
+      console.log(formik.initialValues.hinhAnh)
+      console.log(formData)
       mutation.mutate(formData);
       setSubmitting(false);
     },
