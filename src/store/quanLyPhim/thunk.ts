@@ -4,10 +4,10 @@ import { sleep } from "utils";
 
 export const getMovieListThunk = createAsyncThunk(
     "quanLyPhim/getMovieList",
-    async(_, { rejectWithValue }) => {
+    async(payload: { a: string | undefined, b: string }, { rejectWithValue }) => {
         try{
-            const response1 = await quanLyPhimServices.getPhimList();
-            const response2 = await quanLyPhimServices.getPhimList();
+            const response1 = await quanLyPhimServices.getPhimList(`?maNhom=${payload.a}`);
+            const response2 = await quanLyPhimServices.getPhimList(`?maNhom=${payload.b}`);
             
             const data1 = response1.data?.content || [];
             const data2 = response2.data?.content || [];
