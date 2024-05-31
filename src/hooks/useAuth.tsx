@@ -2,8 +2,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 
 export const useAuth = () => {
-    const { userLogin } = useSelector(
+    const {accessToken, userLogin } = useSelector(
         (state: RootState) => state.quanLyNguoiDung
     );
-  return { userLogin }
+  return { 
+    accessToken,
+    userLogin }
 }
