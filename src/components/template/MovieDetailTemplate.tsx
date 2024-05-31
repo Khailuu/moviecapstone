@@ -59,7 +59,7 @@ export const MovieDetailTemplate = () => {
     };
 
     useEffect(() => {
-        dispatch(getMovieListThunk({ a: maNhom, b: "GP03" }));
+        dispatch(getMovieListThunk);
         dispatch(getShowTimesDetailThunk(id));
     }, [dispatch, id, maNhom]);
 
