@@ -39,7 +39,7 @@ export const AdminTemplate = () => {
   }, [location.pathname]);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout>
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
@@ -67,11 +67,10 @@ export const AdminTemplate = () => {
             </Button>
           </div>
         </Header>
-        <Content style={{ minHeight: '100vh' }}>
+        <Content>
           <div
             style={{
               padding: 24,
-              minHeight: 360,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}

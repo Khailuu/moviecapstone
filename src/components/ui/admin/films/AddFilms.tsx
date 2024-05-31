@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { DatePicker, Form, Input, InputNumber, Radio, Switch } from "antd";
-import { useFormik, FormikHelpers } from "formik";
+import { useFormik } from "formik";
 import moment from "moment";
 import { useUploadPhim } from "hooks/api";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "constant";
+import { toast } from "react-toastify";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 type FormValues = {
@@ -21,7 +24,7 @@ type FormValues = {
 export const AddFilms = () => {
   const [componentSize, setComponentSize] = useState<SizeType | "default">("default");
   const [imgSrc, setImgSrc] = useState<string>("");
-
+  const navigate = useNavigate()
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
   };
@@ -64,7 +67,7 @@ export const AddFilms = () => {
       hinhAnh: null,
       maNhom: "GP03",
     },
-    onSubmit: (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+    onSubmit: (values: FormValues) => {
       const formData = new FormData();
       formData.append('tenPhim', values.tenPhim);
       formData.append('trailer', values.trailer);
@@ -81,8 +84,15 @@ export const AddFilms = () => {
       }
       console.log(formik.initialValues.hinhAnh)
       console.log(formData)
-      mutation.mutate(formData);
-      setSubmitting(false);
+      mutation.mutate(formData, {
+        onSuccess: () => {
+          toast.success("Thêm phim thành công!")
+          navigate(PATH.films)
+        },
+        onError: () => {
+          toast.error("Thêm phim không thành công!")
+        }
+      });
     },
   });
 
@@ -142,7 +152,7 @@ export const AddFilms = () => {
           </Form.Item>
           <Form.Item label="Tải ảnh lên">
             <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} />
-            <img src={imgSrc} alt="Preview" style={{ width: 150, height: 200 }} />
+            <img src={imgSrc} alt="Preview"/>
           </Form.Item>
           <Form.Item label="Tác Vụ">
             <button
