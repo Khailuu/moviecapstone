@@ -6,68 +6,68 @@ import { sleep } from "utils";
 import { getAccessToken } from "utils/getAccessToken";
 
 // quản lý bất đồng bộ
-export const registerThunk = createAsyncThunk('quanLyNguoiDung/register',
-async (payload: RegisterType, {rejectWithValue /*,dispatch, getState*/}) => {
+export const registerThunk = createAsyncThunk(
+  'quanLyNguoiDung/register',
+  async (payload: RegisterType, { rejectWithValue }) => {
     try {
-        // console.log(payload)
-        // sleep them 1s
-        await sleep()
-        const res = await qlNguoiDungServices.dangKy(payload)
-        console.log(res)
+      // sleep thêm 1s
+      await sleep();
+      const res = await qlNguoiDungServices.dangKy(payload);
+      console.log(res);
     } catch (err) {
-        return rejectWithValue(err)
+      return rejectWithValue(err);
     }
-}
-)
+  }
+);
 
-export const loginThunk = createAsyncThunk('quanLyNguoiDung/login',
-async (payload: LoginType, {rejectWithValue}) => {
+export const loginThunk = createAsyncThunk(
+  'quanLyNguoiDung/login',
+  async (payload: LoginType, { rejectWithValue }) => {
     try {
-        await sleep()
-        const res = await qlNguoiDungServices.dangNhap(payload)
-        return res.data.content
+      await sleep();
+      const res = await qlNguoiDungServices.dangNhap(payload);
+      return res.data.content;
     } catch (err) {
-        return rejectWithValue(err)
+      return rejectWithValue(err);
     }
-}
-)
-
+  }
+);
 
 export const putUpdateInfoThunk = createAsyncThunk(
-    "quanLyNguoiDung/putUpdateInfo",
-    async(payload : Update, {rejectWithValue}) => {
-        try {
-            const data = await qlNguoiDungServices.updateAccount(payload)
-            return data.data.content
-        } catch(err) {
-            return rejectWithValue(err)
-        }
-    }
-)
-
-export const uploadThunk = createAsyncThunk('ThemPhimUploadHinh',
-async (payload: FormData, {rejectWithValue}) => {
+  'quanLyNguoiDung/putUpdateInfo',
+  async (payload: Update, { rejectWithValue }) => {
     try {
-        const res = await quanLyPhimServices.uploadPhim(payload)
-        console.log(res)
+      const data = await qlNguoiDungServices.updateAccount(payload);
+      return data.data.content;
+    } catch (err) {
+      return rejectWithValue(err);
     }
-    catch(err) {
-        return rejectWithValue(err)
+  }
+);
+
+export const uploadThunk = createAsyncThunk(
+  'ThemPhimUploadHinh',
+  async (payload: FormData, { rejectWithValue }) => {
+    try {
+      const res = await quanLyPhimServices.uploadPhim(payload);
+      console.log(res);
+    } catch (err) {
+      return rejectWithValue(err);
     }
-}
-)
+  }
+);
 
 export const getHistoryBookingThunk = createAsyncThunk(
-    "quanLyNguoiDung/getHistoryBooking",
-    async(_,{rejectWithValue}) => {
-        try{
-            const token = getAccessToken()
-            if(token) {
-                const data = await qlNguoiDungServices.getHistoryBooking();
-                return data.data.content
-            }
-        } catch(err) {
-            return rejectWithValue(err)
-        }
+  'quanLyNguoiDung/getHistoryBooking',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = getAccessToken();
+      if (token) {
+        const data = await qlNguoiDungServices.getHistoryBooking();
+        return data.data.content;
+      }
+    } catch (err) {
+      return rejectWithValue(err);
     }
-)
+  }
+);
