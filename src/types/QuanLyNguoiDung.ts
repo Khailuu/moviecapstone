@@ -34,6 +34,16 @@ type VePhim = {
     thoiLuongPhim: number
 }
 
+export interface HistoRyBooking {
+    tenPhim: string;
+    maVe: number;
+    ngayDat: string;
+    giaVe: number;
+    danhSachGhe: Ghe[];
+    [key: string]: any; // Other properties if needed
+  }
+  
+
 export type UserInfo = UserLogin & {
     loaiNguoiDung: {
         maLoaiNguoiDung: MaLoaiNgioiDung
@@ -41,3 +51,14 @@ export type UserInfo = UserLogin & {
     }
     thongTinDatVe: VePhim[]
 }
+
+export type Update = {
+    taiKhoan: string;
+    matKhau: string;
+    email: string;
+    soDt: string;
+    maNhom: string;
+    maLoaiNguoiDung: string;
+    hoTen: string;
+};
+

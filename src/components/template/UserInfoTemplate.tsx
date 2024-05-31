@@ -1,6 +1,6 @@
 import { Tabs } from 'antd'
 import { useGetUserInfo } from 'hooks/api'
-import { TabUserInfo, TicketInfo } from 'ui'
+import { TabUserInfo, TicketInfo } from 'components/ui'
 
 const tabItems = [
     {
