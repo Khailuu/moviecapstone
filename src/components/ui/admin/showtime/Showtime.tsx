@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DatePicker, Form, Input, Radio, Select } from "antd";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetThongTinPhim } from "hooks/api/useGetThongTinPhim";
 import { useGetLichChieuHeThongRap } from "hooks/api";
 import { CumRap, TaoLichChieu } from "types";
@@ -9,6 +9,8 @@ import { useFormik } from "formik";
 import moment from "moment";
 import type { DatePickerProps, GetProps } from 'antd';
 import { usePostLichChieu } from "hooks/api/usePostLichChieu";
+import { PATH } from "constant";
+import { toast } from "react-toastify";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 type LichChieu = TaoLichChieu
@@ -21,6 +23,7 @@ const onOk = (value: DatePickerProps['value'] | RangePickerProps['value']) => {
 };
 export const Showtime = () => {
   const mutation = usePostLichChieu()
+  const navigate = useNavigate()
   const { maPhim } = useParams<{ maPhim: string }>();
   const maPhimParsed = parseInt(maPhim || "", 10);
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
@@ -64,7 +67,15 @@ export const Showtime = () => {
       giaVe: 0,
     },
     onSubmit: (values: LichChieu) => {
-      mutation.mutate(values)
+      mutation.mutate(values, {
+        onSuccess: () => {
+          navigate(PATH.films)
+          toast.success("Tạo lịch chiếu thành công !")
+        },
+        onError: () => {
+          toast.error("Tạo lịch chiếu không thành công !")
+        }
+      })
     },
   });
 
@@ -103,7 +114,7 @@ export const Showtime = () => {
         >
           {phim?.tenPhim}
         </h3>
-        <img src={phim?.hinhAnh} className="mb-[40px]" alt="logoPhim" />
+        <img src={phim?.hinhAnh} className="mb-[40px] w-[200px]" alt="logoPhim" />
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}

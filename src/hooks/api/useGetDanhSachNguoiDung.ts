@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import { qlNguoiDungServices } from "services"
 
-export const useGetUserInfo = () => {
+export const useGetDanhSachNguoiDung = () => {
     const q = useQuery({
-        queryKey: ['UserInfo'],
-        queryFn: () => qlNguoiDungServices.getUserInfo(),
+        queryKey: ['GetDanhSachNguoiDung'],
+        queryFn: () => {
+            return qlNguoiDungServices.getDanhSachNguoiDung()
+        }
     })
     return {
         ...q,

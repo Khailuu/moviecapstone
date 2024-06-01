@@ -34,6 +34,24 @@ type VePhim = {
     thoiLuongPhim: number
 }
 
+export type TaiKhoan = {
+    taiKhoan: string;
+    hoTen: string;
+    email: string;
+    soDT: string;
+    matKhau: string;
+    maLoaiNguoiDung: string
+}
+// {
+//     "taiKhoan": "AA123",
+//     "hoTen": "Nguyen ",
+//     "email": "teste32323@gmail.com",
+//     "soDT": "0123456777",
+//     "matKhau": "Nam1305.",
+//     "maLoaiNguoiDung": "KhachHang"
+//   },
+
+
 export interface HistoRyBooking {
     tenPhim: string;
     maVe: number;
@@ -60,5 +78,7 @@ export type Update = {
     maNhom: string;
     maLoaiNguoiDung: string;
     hoTen: string;
-};
+}
+
+
 

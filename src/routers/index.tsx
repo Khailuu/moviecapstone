@@ -6,6 +6,7 @@ import { UserInfo } from 'pages/UserInfo'
 import { DashBoard } from 'components/ui/admin/dashboard'
 import { AddFilms, Films } from 'components/ui/admin/films'
 import { Showtime } from 'components/ui/admin/showtime'
+import { KetQuaDatVe } from 'components/ui/datVe/KetQuaDatVe'
 
 
 
@@ -37,6 +38,10 @@ const router: RouteObject[] = [
                 children: [
                     {
                         path: `${PATH.datVe}/:maLichChieu`
+                    },
+                    {
+                        path: PATH.ketquadatve,
+                        element: <KetQuaDatVe />
                     }
                 ]
             },

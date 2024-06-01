@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const addFilmsSchema = z.object({
     temPhim: z.string({required_error: "Làm ơn nhập tên phim"}).min(1),
-
+    trailer: z.string({required_error: "Trailer không để trống"}).min(1),
+    moTa: z.string({required_error: "Mô tả không để trống"}).min(1),
+    danhGia: z.string({required_error: "Đánh giá không để trống"}).min(1),
+    maNhom: z.string({required_error: "Mã nhóm không để trống"}).min(1),
 });
 
 // biDanh: "nguoi-vo-cuoi-cung-victo-vu";

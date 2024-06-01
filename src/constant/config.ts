@@ -9,4 +9,5 @@ export const PATH = {
     films: '/admin/films',
     addFilms: '/admin/films/addfilms',
     showtime: '/admin/showtime',
+    ketquadatve: '/datve/ketquadatve'
 }

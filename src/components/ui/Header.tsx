@@ -102,18 +102,19 @@ export const Header = () => {
                     <Button
                       type="text"
                       onClick={() => {
-                        navigate(PATH.admin);
+                        navigate(PATH.dashboard);
                       }}
                     >
-                      Quản lý
+                      Dành cho Admin
                     </Button>
-                    <Divider className="py-10" />
+                    <Divider className="pb-[5px]" />
                     <Button
                       type="primary"
                       danger
                       onClick={() => {
                         removeUserLogin();
                       }}
+                      className="w-full"
                     >
                       Đăng xuất
                     </Button>
@@ -137,7 +138,6 @@ export const Header = () => {
     }
   };
 
-  console.log("userLoginHome: ", userLogin);
 
   return (
     <header
