@@ -98,12 +98,13 @@ export const TabUserInfo = () => {
             />
             
             <div className="text-right mt-20">
-                <Button htmlType="submit" type="primary" className="!h-[46px]" onClick={(event) => {
+            <Button htmlType="submit" type="primary" className="!h-[46px]" onClick={(event) => {
                     console.log(event.target);
-
+                    
                 }}>
-                    Update
+                    Hoàn thành chỉnh sửa
                 </Button>
+                
             </div>
         </form>
     );
