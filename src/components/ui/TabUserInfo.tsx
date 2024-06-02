@@ -42,7 +42,8 @@ export const TabUserInfo = () => {
 
         dispatch(putUpdateInfoThunk(updateData))
             .unwrap()
-            .then(() => toast.success('Cập nhật thành công!'));
+            .then(() => toast.success('Cập nhật thành công!'))
+            .catch((err) => toast.error(err?.response?.data?.content));
 
     }
 
@@ -62,6 +63,16 @@ export const TabUserInfo = () => {
                 name="taiKhoan"
                 register={register}
                 error={errors?.taiKhoan?.message}
+                className="[&>input]:bg-transparent [&>input]:border-white [&>input]:border"
+            />
+            <Input
+                label="Mật khẩu mới"
+                id="matKhau"
+                name="matKhau"
+                type="password"
+                placeholder="Mật khẩu mới"
+                register={register}
+                error={errors?.matKhau?.message}
                 className="[&>input]:bg-transparent [&>input]:border-white [&>input]:border"
             />
             <Input

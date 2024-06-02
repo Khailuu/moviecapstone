@@ -1,17 +1,12 @@
 import { Tabs } from 'antd'
 import { useGetUserInfo } from 'hooks/api'
-import { TabUserInfo, TicketInfo } from 'components/ui'
+import { TabUserInfo } from 'components/ui'
 
 const tabItems = [
     {
         label: 'Thông tin tài khoản',
         key: 'thongTinTaiKhoan',
         children: <TabUserInfo />,
-    },
-    {
-        label: 'Thông tin đặt vé',
-        key: 'thongTinDatVe',
-        children: <TicketInfo />,
     },
 ]
 
