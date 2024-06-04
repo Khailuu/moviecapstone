@@ -20,13 +20,12 @@ export const LoginTemplate = () => {
     } = useForm<LoginType>({
         resolver: zodResolver(loginSchema),
     })
-    console.log("userloginTemplate:", userLogin)
 
     const onSubmit: SubmitHandler<LoginType> = (values) => {
         dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(() => {
             toast.success('Login Success')
             if (userLogin?.maLoaiNguoiDung === 'QuanTri') {
-                navigate('/admin')
+                navigate(PATH.dashboard)
             } else if (userLogin?.maLoaiNguoiDung === 'KhachHang') {
                 navigate('/')
             }
@@ -38,7 +37,7 @@ export const LoginTemplate = () => {
 
     if (userLogin) {
         if (userLogin.maLoaiNguoiDung === 'QuanTri') {
-            return <Navigate to='/admin' />
+            return <Navigate to={PATH.dashboard} />
         } else if (userLogin.maLoaiNguoiDung === 'KhachHang') {
             return <Navigate to='/' />
         }

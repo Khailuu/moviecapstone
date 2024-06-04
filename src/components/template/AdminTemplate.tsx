@@ -39,10 +39,17 @@ export const AdminTemplate = () => {
   }, [location.pathname]);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh" }}> 
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
+        <NavLink to="/">
+            <img
+
+              src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
+              className="my-[20px] p-1"
+            />
+          </NavLink>
           <Menu.Item key={PATH.dashboard} icon={<UserOutlined />}>
             <NavLink to={PATH.dashboard}>Users</NavLink>
           </Menu.Item>
@@ -55,7 +62,7 @@ export const AdminTemplate = () => {
             </Menu.Item>
           </SubMenu>
           <Menu.Item key={PATH.showtime} icon={<DesktopOutlined />}>
-            <NavLink to={PATH.showtime}>Showtime</NavLink>
+            <p>Showtime</p>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -67,11 +74,11 @@ export const AdminTemplate = () => {
             </Button>
           </div>
         </Header>
-        <Content style={{ minHeight: '100vh' }}>
+        <Content>
           <div
             style={{
+              margin: 20,
               padding: 24,
-              minHeight: 360,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}

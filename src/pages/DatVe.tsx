@@ -26,7 +26,6 @@ export const DatVe = () => {
   const { userLogin } = useAuth()
   const navigate = useNavigate()
   
-  console.log(userLogin)
 
   useEffect(()=>{
     if(!userLogin) {

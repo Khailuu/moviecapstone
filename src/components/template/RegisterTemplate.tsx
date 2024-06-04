@@ -23,7 +23,6 @@ export const RegisterTemplate = () => {
   } = useForm<RegisterType>({
     resolver: zodResolver(registerSchema),
   });
-  console.log(errors);
   // const onSubmit: SubmitHandler<RegisterType> = async (value) => {
   //   try {
   //     await qlndServices.dangKy(value);

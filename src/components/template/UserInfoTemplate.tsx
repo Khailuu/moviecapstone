@@ -15,8 +15,6 @@ export const UserInfoTemplate = () => {
     //     queryKey: ['UserInfo'],
     //     queryFn: () => qlNguoiDungServices.getUserInfo(),
     // })
-    const { data } = useGetUserInfo()
-    console.log('data: ', data)
 
     // Nếu user cập nhật thành công:
     // B1: Lưu lại thông tin mới vào local storage
