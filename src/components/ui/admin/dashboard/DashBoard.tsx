@@ -4,6 +4,8 @@ import type { TableColumnsType, TableProps } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import { useDeleteNguoiDung } from "hooks/api/useDeleteNguoiDung";
+import { NavLink } from "react-router-dom";
+import { PATH } from "constant";
 
 interface DataType {
   taiKhoan: string;
@@ -63,7 +65,9 @@ export const DashBoard = () => {
       render: (_, nguoiDung) => {
         return (
           <div>
+            <NavLink to={`${PATH.editNguoiDung}/${nguoiDung.taiKhoan}`}>
             <EditOutlined className="mr-[15px]" style={{ color: "blue" }} />
+            </NavLink>
             <DeleteOutlined
               onClick={() => {
                 mutation.mutate(nguoiDung.taiKhoan, {

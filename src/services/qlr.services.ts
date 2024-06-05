@@ -6,7 +6,7 @@ const api = apiInstance.create({
 })
 
 export const quanLyRapServices = {
-    getThongTinLichChieuHeThongRap: () => api.get<HttpResponse<Rap[]>>('/LayThongTinLichChieuHeThongRap'),
+    getThongTinLichChieuHeThongRap: () => api.get<HttpResponse<Rap[]>>('/LayThongTinLichChieuHeThongRap?maNhom=GP03'),
     getThongTinHeThongRap: () => api.get<HttpResponse<HeThongRap[]>>("/LayThongTinHeThongRap"),
     getThongTinCumRapTheoHeThong: (maHeThongRap: string) => api.get<HttpResponse<CumRap[]>>(`/LayThongTinCumRapTheoHeThong?maHeThongRap=${maHeThongRap}`),
 

@@ -3,6 +3,7 @@ import { Fragment } from "react/jsx-runtime";
 
 export const KetQuaDatVe = () => {
   const { data: infoList } = useGetUserInfo();
+  console.log(infoList)
 
   // Debugging log to check the structure of infoList
   // Ensure infoList is an array before mapping
@@ -32,14 +33,15 @@ export const KetQuaDatVe = () => {
                           src={info.hinhAnh}
                         />
                         <div className="flex-grow">
-                            <h1 className="text-[#90c63f] text-[20px]">
+                            <h1 className="text-[#90c63f] text-[20px] !mb-[5px]">
                                 {
                                     ticket.tenHeThongRap
                                 }
                             </h1>
-                          <h2 className="text-white ">
+                          <h2 className="text-white">
                             {info.tenPhim}
                           </h2>
+                          <p className="my-[8px] text-[#90c63f]">Ghế: {ticket.tenGhe}</p>
                           <p className="text-gray-500">{info.ngayDat}</p>
                         </div>
                       </div>

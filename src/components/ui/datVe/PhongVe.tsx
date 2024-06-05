@@ -41,7 +41,7 @@ export const PhongVe = () => {
   }
 
   if (!list) {
-    return <div>Đang tải...</div>;
+    return <div className="text-white">Đang tải...</div>;
   }
 
   cartList.forEach((item) => {
@@ -89,7 +89,7 @@ export const PhongVe = () => {
                     className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDD} ${classGheDuocMinhDat}`}
                     key={i}
                   >
-                    {ghe.daDat ? <CloseOutlined /> : ghe.stt}
+                    {(ghe.daDat ? <CloseOutlined /> : ghe.stt)}
                   </button>
                 );
               })}

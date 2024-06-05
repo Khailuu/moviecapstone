@@ -35,6 +35,8 @@ type VePhim = {
 }
 
 export type TaiKhoan = {
+    [x: string]: any
+    length: number
     taiKhoan: string;
     hoTen: string;
     email: string;
@@ -42,6 +44,8 @@ export type TaiKhoan = {
     matKhau: string;
     maLoaiNguoiDung: string
 }
+
+
 // {
 //     "taiKhoan": "AA123",
 //     "hoTen": "Nguyen ",

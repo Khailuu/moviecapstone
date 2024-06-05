@@ -35,6 +35,7 @@ export const RegisterTemplate = () => {
   // };
 
   const onSubmit: SubmitHandler<RegisterType> = (values) => {
+    console.log(values)
     // dispatch(quanLyNguoiDungActionThunks.registerThunk(123) as unknown as UnknownAction)
     dispatch(quanLyNguoiDungActionThunks.registerThunk(values)).unwrap().then(()=> {
       toast.success("Register Success!");
