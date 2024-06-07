@@ -8,9 +8,8 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useGetThongTinPhim } from "hooks/api/useGetThongTinPhim";
 import dayjs from "dayjs";
-import localeData from 'dayjs/plugin/localeData'
-import weekday from 'dayjs/plugin/weekday'
-
+import localeData from "dayjs/plugin/localeData";
+import weekday from "dayjs/plugin/weekday";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 type FormValues = {
@@ -42,8 +41,8 @@ const addFilmSchema = Yup.object().shape({
 });
 
 export const EditFilm = () => {
-  dayjs.extend(weekday)
-dayjs.extend(localeData)
+  dayjs.extend(weekday);
+  dayjs.extend(localeData);
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -81,20 +80,15 @@ dayjs.extend(localeData)
       formik.setFieldValue("hinhAnh", file);
     }
   };
-  const dateFormat = 'DD/MM/YYYY';
+  const dateFormat = "MM-DD-YYYY";
   const mutation = useUploadPhim();
 
-  const handleChangeDatePicker = (value: { format: (arg0: string) => any; }) => {
-    console.log(value);
+  const handleChangeDatePicker = (value: dayjs.Dayjs | null) => {
     if (value) {
-      formik.setFieldValue("ngayKhoiChieu", value.format("DD-MM-YYYY"));
+      formik.setFieldValue("ngayKhoiChieu", value.format(dateFormat));
     } else {
-      formik.setFieldValue("ngayKhoiChieu", null);
+      formik.setFieldValue("ngayKhoiChieu", "");
     }
-    // console.log(value)
-    // const date = value.format("DD/MM/YYYY");
-    // console.log("date: ",date)
-    // formik.setFieldValue("ngayKhoiChieu", date);
   };
 
   const formik = useFormik<FormValues>({
@@ -204,12 +198,13 @@ dayjs.extend(localeData)
           <Form.Item label="Ngày khởi chiếu">
             <DatePicker
               name="ngayKhoiChieu"
-              value={dayjs(formik.values.ngayKhoiChieu, dateFormat)} format={dateFormat}
+              value={formik.values.ngayKhoiChieu ? dayjs(formik.values.ngayKhoiChieu, dateFormat) : null}
+              format={dateFormat}
               onChange={handleChangeDatePicker}
             />
-            {/* {formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? (
+            {formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? (
               <div className="text-red-500">{formik.errors.ngayKhoiChieu}</div>
-            ) : null} */}
+            ) : null}
           </Form.Item>
           <Form.Item label="Đang chiếu" valuePropName="checked">
             <Switch
