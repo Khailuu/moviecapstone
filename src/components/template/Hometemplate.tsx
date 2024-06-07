@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import '../../assets/button.css'
 import { generatePath, useNavigate } from "react-router-dom";
 import { PATH } from "constant";
-import { useAuth } from "hooks";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -42,10 +41,6 @@ export const Hometemplate = () => {
     setIsShowingNow(false)
     setActiveButton('upcoming')
   };
-
-  const {userLogin } = useAuth()
-  console.log(userLogin)
-
   
   const { data: phimList, isFetching: isFetchingPhimList } = useGetPhimList();
   const filteredPhimList = phimList?.filter(phim => {

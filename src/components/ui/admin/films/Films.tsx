@@ -2,12 +2,12 @@ import { Button, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import { Input } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
-import { useGetPhimList } from "hooks/api";
 import { DeleteOutlined, EditOutlined, FormOutlined } from "@ant-design/icons";
 import { useDeletePhim } from "hooks/api/useDeletePhim";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 import { PATH } from "constant";
+import { useGetMovieList } from "hooks/api/useGetMovieList";
 const { Search } = Input;
 const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
@@ -31,20 +31,20 @@ export const Films = () => {
       sapChieu: boolean
   }
   
-  const { data: phimList } = useGetPhimList()
+  const { data: phimList, refetch } = useGetMovieList()
   
   const columns: TableColumnsType<DataType> = [
     {
       title: "maPhim",
       dataIndex: "maPhim",
       showSorterTooltip: { target: "full-header" },
-      width: 200,
+      width: "10%",
       sorter: (a, b) => a.maPhim - b.maPhim,
       sortDirections: ["descend" , "ascend"],
     },
     {
       title: "Hình Ảnh",
-      width: 200,
+      width: "10%",
       dataIndex: "hinhAnh",
       render: (_, film ) => {
         return (
@@ -58,18 +58,19 @@ export const Films = () => {
       title: "Tên Phim",
       dataIndex: "tenPhim",
       sortDirections: ["descend"],
-      width: 400,
+      width: "20%",
       onFilter: (value, record) => record.tenPhim.indexOf(value as string) === 0,
     },
     {
       title: "Mô Tả",
       dataIndex: "moTa",
       ellipsis: true,
-      width: 550
+      width: "40%"
     },
     {
       title: 'Hành Động',
       dataIndex: '',
+      width: "20%",
       key: 'x',
       render: (_, film) => {
         return (
@@ -77,12 +78,18 @@ export const Films = () => {
             <EditOutlined className="mr-[15px]" style={{color: "blue"}} />
               <NavLink to={`${PATH.showtime}/${film.maPhim}`}>
                 <FormOutlined className="mr-[15px]" style={{color: "green"}} onClick={() =>{
-                  console.log(film.maPhim)
                 }}/>
               </NavLink>
             <DeleteOutlined onClick={() => {
-              mutation.mutate(film.maPhim)
-              toast.success("Xoá Thành Công!")
+              mutation.mutate(film.maPhim, {
+                onSuccess: () => {
+                  refetch()
+                  toast.success("Xoá Thành Công!")
+                },
+                onError: () => {
+                  toast.error("Xoá không thành công!")
+                }
+              })
             }} className="mr-[15px]" style={{color: "red"}} />
           </div>
         )

@@ -5,8 +5,6 @@ export const KetQuaDatVe = () => {
   const { data: infoList } = useGetUserInfo();
 
   // Debugging log to check the structure of infoList
-  console.log(infoList);
-
   // Ensure infoList is an array before mapping
 
   return (
