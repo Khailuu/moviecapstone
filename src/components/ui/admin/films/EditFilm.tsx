@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useGetThongTinPhim } from "hooks/api/useGetThongTinPhim";
 import dayjs from "dayjs";
+import localeData from 'dayjs/plugin/localeData'
+import weekday from 'dayjs/plugin/weekday'
+
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 type FormValues = {
@@ -39,6 +42,8 @@ const addFilmSchema = Yup.object().shape({
 });
 
 export const EditFilm = () => {
+  dayjs.extend(weekday)
+dayjs.extend(localeData)
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -76,13 +81,16 @@ export const EditFilm = () => {
       formik.setFieldValue("hinhAnh", file);
     }
   };
-
+  const dateFormat = 'DD/MM/YYYY';
   const mutation = useUploadPhim();
 
-  const handleChangeDatePicker = (value: any) => {
+  const handleChangeDatePicker = (value: { format: (arg0: string) => any; }) => {
     console.log(value);
-    console.log(value.format("DD/MM/YYYY"));
-    formik.setFieldValue("ngayKhoiChieu", value.format("DD/MM/YYYY"));
+    if (value) {
+      formik.setFieldValue("ngayKhoiChieu", value.format("DD-MM-YYYY"));
+    } else {
+      formik.setFieldValue("ngayKhoiChieu", null);
+    }
     // console.log(value)
     // const date = value.format("DD/MM/YYYY");
     // console.log("date: ",date)
@@ -195,8 +203,8 @@ export const EditFilm = () => {
           </Form.Item>
           <Form.Item label="Ngày khởi chiếu">
             <DatePicker
-              format="DD/MM/YYYY"
-              value={dayjs(formik.values.tenPhim, "DD/MM/YYYY")}
+              name="ngayKhoiChieu"
+              value={dayjs(formik.values.ngayKhoiChieu, dateFormat)} format={dateFormat}
               onChange={handleChangeDatePicker}
             />
             {/* {formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? (

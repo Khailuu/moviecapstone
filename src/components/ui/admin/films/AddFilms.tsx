@@ -170,7 +170,7 @@ export const AddFilms = () => {
             ) : null}
           </Form.Item>
           <Form.Item label="Ngày khởi chiếu">
-            <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} />
+            <DatePicker format={"DD/MM/YYYY"}  onChange={handleChangeDatePicker} />
             {/* {formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? (
               <div className="text-red-500">{formik.errors.ngayKhoiChieu}</div>
             ) : null} */}
