@@ -8,6 +8,7 @@ export const PATH = {
     dashboard: '/admin/dashboard',
     editNguoiDung: '/admin/dashboard/editnguoidung',
     films: '/admin/films',
+    editfilm: '/admin/films/editfilm',
     addFilms: '/admin/films/addfilms',
     showtime: '/admin/showtime',
     ketquadatve: '/datve/ketquadatve'

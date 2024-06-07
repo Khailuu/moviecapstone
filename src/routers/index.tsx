@@ -8,6 +8,7 @@ import { AddFilms, Films } from 'components/ui/admin/films'
 import { Showtime } from 'components/ui/admin/showtime'
 import { KetQuaDatVe } from 'components/ui/datVe/KetQuaDatVe'
 import { EditNguoidung } from 'components/ui/admin/dashboard/EditNguoidung'
+import { EditFilm } from 'components/ui/admin/films/EditFilm'
 
 
 
@@ -77,6 +78,10 @@ const router: RouteObject[] = [
             {
                 path: PATH.addFilms,
                 element: <AddFilms />
+            },
+            {
+                path: `${PATH.editfilm}/:maPhim`,
+                element: <EditFilm />
             },
             {
                 path: `${PATH.showtime}`,

@@ -67,6 +67,7 @@ export const Showtime = () => {
       giaVe: 0,
     },
     onSubmit: (values: LichChieu) => {
+      console.log(values)
       mutation.mutate(values, {
         onSuccess: () => {
           navigate(PATH.films)
@@ -84,7 +85,7 @@ export const Showtime = () => {
   };
 
   const handleChangeDatePicker = (value: any) => {
-    const date = moment(value).format("DD/MM/YYYY hh:mm:ss")
+    const date = value.format("DD/MM/YYYY hh:mm:ss")
     formik.setFieldValue("ngayChieuGioChieu", date)
   }
   const handleChangeCumRap = (value: string) => {
