@@ -1,12 +1,17 @@
 import { Tabs } from 'antd'
-import { useGetUserInfo } from 'hooks/api'
 import { TabUserInfo } from 'components/ui'
+import { TicketInfo } from 'components/ui/TicketInfo'
 
 const tabItems = [
     {
         label: 'Thông tin tài khoản',
         key: 'thongTinTaiKhoan',
         children: <TabUserInfo />,
+    },
+    {
+        label: 'Thông tin đặt vé',
+        key: 'thongTinDatVe',
+        children: <TicketInfo />,
     },
 ]
 
@@ -15,8 +20,6 @@ export const UserInfoTemplate = () => {
     //     queryKey: ['UserInfo'],
     //     queryFn: () => qlNguoiDungServices.getUserInfo(),
     // })
-    const { data } = useGetUserInfo()
-    console.log('data: ', data)
 
     // Nếu user cập nhật thành công:
     // B1: Lưu lại thông tin mới vào local storage

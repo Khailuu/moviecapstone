@@ -59,10 +59,12 @@ export const TabUserInfo = () => {
             <p className="text-20 font-600">Thông tin tài khoản</p>
             <Input
                 label="Tài khoản"
+                onChange={() => {}}
                 id="taiKhoan"
                 name="taiKhoan"
                 register={register}
                 error={errors?.taiKhoan?.message}
+                
                 className="[&>input]:bg-transparent [&>input]:border-white [&>input]:border"
             />
             <Input
@@ -109,9 +111,9 @@ export const TabUserInfo = () => {
             />
             
             <div className="text-right mt-20">
-            <Button htmlType="submit" type="primary" className="!h-[46px]" onClick={(event) => {
+                <Button htmlType="submit" type="primary" className="!h-[46px]" onClick={(event) => {
                     console.log(event.target);
-                    
+
                 }}>
                     Hoàn thành chỉnh sửa
                 </Button>
