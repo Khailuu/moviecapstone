@@ -6,7 +6,6 @@ import { useGetLichChieuHeThongRap } from "hooks/api";
 import { CumRap, TaoLichChieu } from "types";
 import { quanLyRapServices } from "services";
 import { useFormik } from "formik";
-import moment from "moment";
 import type { DatePickerProps, GetProps } from 'antd';
 import { usePostLichChieu } from "hooks/api/usePostLichChieu";
 import { PATH } from "constant";
