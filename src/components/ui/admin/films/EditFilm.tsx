@@ -5,9 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { useGetThongTinPhim } from "hooks/api/useGetThongTinPhim";
 import { usePostPhimUpload } from "hooks/api/usePostPhimUpload";
-import moment from "moment";
+// import moment from "moment";
 import { toast } from "react-toastify";
 import { PATH } from "constant";
+// import { useAppDispatch } from "store";
+// import { quanLyPhimActionThunks } from "store/quanLyPhim";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 type FormValues = {
@@ -73,10 +75,12 @@ export const EditFilm = () => {
       };
     }
   };
+  // const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const mutation = usePostPhimUpload() 
-  const handleChangeDatePicker = (value: moment.MomentInput) => {
-    formik.setFieldValue("ngayKhoiChieu", moment(value))
+  const handleChangeDatePicker = (value: any) => {
+    formik.setFieldValue("ngayKhoiChieu", value.format("DD/MM/YYYY"))
+
   };
   const formik = useFormik<FormValues>({
     enableReinitialize: true,
@@ -113,6 +117,14 @@ export const EditFilm = () => {
       if (values.hinhAnh) {
         formData.append("hinhAnh", values.hinhAnh, values.hinhAnh.name);
       }
+      // dispatch(quanLyPhimActionThunks.editMovieThunk(formData)).unwrap()
+      // .then(() => {
+      //   toast.success("Cập nhật phim thành công")
+      // })
+      // .catch((err) => {
+      //   console.log(formData)
+      //  console.log(err)
+      // })
       mutation.mutate(formData, {
         onSuccess: () => {
           toast.success("Thêm phim thành công!");
