@@ -29,31 +29,7 @@ export default {
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
-B1: 
-yarn create vite
-B2:
-install tailwind
-yarn add -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-
-yarn add react-router-dom
-
-hỗ trợ import directory 
-yarn add @types/node  
-yarn add react-hook-form
-yarn add zod @hookform/resolvers
+Lưu Đức Khải: Home Page, Đặt vé, Admin page (full)
+Ngô Mạnh Hùng: detail Page, UserInfo
 
 
-validation sử dụng zod => tạo schema
-
-extra reducer: xử lý bất đồng bộ
-
-middleware thunk
-
-mỗi service tạo ra 1 reducer
-
-getState === useSelector
-
-api get du lieu thuong tao folder api trong hooks
-
-skeleton
