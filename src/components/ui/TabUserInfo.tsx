@@ -10,51 +10,45 @@ import { putUpdateInfoThunk } from "store/quanLyNguoiDung/thunk";
 import { Update } from "types";
 
 export const TabUserInfo = () => {
-    const dispatch = useAppDispatch()
-    const { userLogin } = useAuth();
-    const {
-        reset,
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm<RegisterType>({
-        resolver: zodResolver(registerSchema),
-        mode: "onBlur"
+  const dispatch = useAppDispatch();
+  const { userLogin } = useAuth();
+  const {
+    reset,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<RegisterType>({
+    resolver: zodResolver(registerSchema),
+    mode: "onBlur",
+  });
+
+  const onSubmit: SubmitHandler<RegisterType> = (value) => {
+    // dispatch actions getUsserByAccessToken
+    const { taiKhoan, matKhau, email, soDt, maNhom, hoTen } = value;
+
+    const updateData: Update = {
+      taiKhoan,
+      matKhau,
+      email,
+      soDt,
+      maNhom,
+      maLoaiNguoiDung: "KhachHang",
+      hoTen,
+    };
+
+    dispatch(putUpdateInfoThunk(updateData))
+      .unwrap()
+      .then(() => toast.success("Cập nhật thành công!"))
+      .catch((err) => toast.error(err?.response?.data?.content));
+  };
+
+  useEffect(() => {
+    reset({
+      ...userLogin,
+      soDt: userLogin?.soDT,
     });
-
-
-    const onSubmit: SubmitHandler<RegisterType> = (value) => {
-
-
-
-        // dispatch actions getUsserByAccessToken
-        const { taiKhoan, matKhau, email, soDt, maNhom, hoTen } = value;
-
-        const updateData: Update = {
-            taiKhoan,
-            matKhau,
-            email,
-            soDt,
-            maNhom,
-            maLoaiNguoiDung: 'KhachHang',
-            hoTen,
-        };
-
-        dispatch(putUpdateInfoThunk(updateData))
-            .unwrap()
-            .then(() => toast.success('Cập nhật thành công!'))
-            .catch((err) => toast.error(err?.response?.data?.content));
-
-    }
-
-    useEffect(() => {
-        reset({
-            ...userLogin,
-            soDt: userLogin?.soDT,
-        });
-    }, [reset, userLogin]);
-    return (
-
+  }, [reset, userLogin]);
+  return (
         <form className="text-white" onSubmit={handleSubmit(onSubmit)}>
             <p className="text-20 font-600">Thông tin tài khoản</p>
             <Input
@@ -125,4 +119,12 @@ export const TabUserInfo = () => {
             </div>
         </form>
     );
+      <div className="text-right mt-20">
+        <Button htmlType="submit" type="primary" className="!h-[46px]">
+          Hoàn thành chỉnh sửa
+        </Button>
+      </div>
+    </form>
+  );
+
 };
