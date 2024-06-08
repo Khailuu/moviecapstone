@@ -16,7 +16,6 @@ type QuanLyNguoiDungInitialState = {
   cartList: Ghe[];  
   userInfo: {};
   update?: Update[];
-  historyBooking: HistoRyBooking[] | undefined;
 };
 
 const initialState: QuanLyNguoiDungInitialState = {
@@ -29,7 +28,6 @@ const initialState: QuanLyNguoiDungInitialState = {
   cartList: [] as Ghe[],
   userInfo: {},
   update: [] as Update[],
-  historyBooking: undefined,
 };
 
 
