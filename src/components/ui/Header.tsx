@@ -99,7 +99,9 @@ export const Header = () => {
               <Popover
                 content={
                   <div>
+                    <div className="flex flex-col">
                     <Button
+                    className="!text-center mb-[10px] !bg-gray-200"
                       type="text"
                       onClick={() => {
                         navigate(PATH.dashboard);
@@ -107,7 +109,17 @@ export const Header = () => {
                     >
                       Dành cho Admin
                     </Button>
-                    <Divider className="pb-[5px]" />
+                    <Button
+                    className="!bg-gray-200"
+                      type="text"
+                      onClick={() => {
+                        navigate(PATH.userInfo);
+                      }}
+                    >
+                      Thông tin tài khoản
+                    </Button>
+                    </div>
+                    <hr  className="my-[10px]"/>
                     <Button
                       type="primary"
                       danger

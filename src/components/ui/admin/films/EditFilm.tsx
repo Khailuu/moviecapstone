@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { DatePicker, Form, Input, InputNumber, Radio, Switch } from "antd";
 import { useFormik } from "formik";
-import { useUploadPhim } from "hooks/api";
 import { useNavigate, useParams } from "react-router-dom";
-import { PATH } from "constant";
-import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useGetThongTinPhim } from "hooks/api/useGetThongTinPhim";
-import dayjs from "dayjs";
-import localeData from "dayjs/plugin/localeData";
-import weekday from "dayjs/plugin/weekday";
+import { usePostPhimUpload } from "hooks/api/usePostPhimUpload";
+import moment from "moment";
+import { toast } from "react-toastify";
+import { PATH } from "constant";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 type FormValues = {
@@ -36,18 +34,14 @@ const addFilmSchema = Yup.object().shape({
     .required("Không được để trống"),
   moTa: Yup.string().required("Không được để trống"),
   ngayKhoiChieu: Yup.string().required("Không được để trống"),
-  danhGia: Yup.number().min(1).max(5).required("Không được để trống"),
-  hinhAnh: Yup.mixed().required("Không được để trống"),
+  danhGia: Yup.number().min(1).max(10).required("Không được để trống"),
 });
 
 export const EditFilm = () => {
-  dayjs.extend(weekday);
-  dayjs.extend(localeData);
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
   const [imgSrc, setImgSrc] = useState<string>("");
-  const navigate = useNavigate();
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
   };
@@ -55,7 +49,6 @@ export const EditFilm = () => {
   const { maPhim } = useParams<{ maPhim: string }>();
   const maPhimParse = parseInt(maPhim || "", 10);
   const { data: thongTinPhim } = useGetThongTinPhim(maPhimParse);
-  console.log(thongTinPhim);
 
   const handleChangeSwitch = (name: keyof FormValues) => {
     return (value: boolean) => {
@@ -63,7 +56,7 @@ export const EditFilm = () => {
     };
   };
 
-  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files?.[0];
     if (
       file &&
@@ -72,25 +65,19 @@ export const EditFilm = () => {
         file.type === "image/png" ||
         file.type === "image/gif")
     ) {
+      await formik.setFieldValue("hinhAnh", file);
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e) => {
         setImgSrc(e.target?.result as string);
       };
-      formik.setFieldValue("hinhAnh", file);
     }
   };
-  const dateFormat = "MM-DD-YYYY";
-  const mutation = useUploadPhim();
-
-  const handleChangeDatePicker = (value: dayjs.Dayjs | null) => {
-    if (value) {
-      formik.setFieldValue("ngayKhoiChieu", value.format(dateFormat));
-    } else {
-      formik.setFieldValue("ngayKhoiChieu", "");
-    }
+  const navigate = useNavigate()
+  const mutation = usePostPhimUpload() 
+  const handleChangeDatePicker = (value: moment.MomentInput) => {
+    formik.setFieldValue("ngayKhoiChieu", moment(value))
   };
-
   const formik = useFormik<FormValues>({
     enableReinitialize: true,
     initialValues: {
@@ -108,6 +95,10 @@ export const EditFilm = () => {
     validationSchema: addFilmSchema,
     onSubmit: (values: FormValues) => {
       console.log(values);
+      // const formattedDate = dayjs(values.ngayKhoiChieu, dateFormat).format(
+      //   "DD-MM-YYYY"
+      // );
+      // console.log(formattedDate)
       const formData = new FormData();
       formData.append("tenPhim", values.tenPhim);
       formData.append("trailer", values.trailer);
@@ -118,11 +109,10 @@ export const EditFilm = () => {
       formData.append("hot", values.hot.toString());
       formData.append("danhGia", values.danhGia.toString());
       formData.append("maNhom", values.maNhom);
-
+      console.log(formData)
       if (values.hinhAnh) {
         formData.append("hinhAnh", values.hinhAnh, values.hinhAnh.name);
       }
-
       mutation.mutate(formData, {
         onSuccess: () => {
           toast.success("Thêm phim thành công!");
@@ -130,7 +120,7 @@ export const EditFilm = () => {
         },
         onError: () => {
           toast.error("Thêm phim không thành công!");
-        },
+        }
       });
     },
   });
@@ -145,7 +135,7 @@ export const EditFilm = () => {
           marginBottom: 30,
         }}
       >
-        Thêm mới phim
+        Cập Nhật phim
       </h3>
       <div className="container ms-auto">
         <Form
@@ -197,14 +187,12 @@ export const EditFilm = () => {
           </Form.Item>
           <Form.Item label="Ngày khởi chiếu">
             <DatePicker
-              name="ngayKhoiChieu"
-              value={formik.values.ngayKhoiChieu ? dayjs(formik.values.ngayKhoiChieu, dateFormat) : null}
-              format={dateFormat}
+              format="DD/MM/YYYY"
               onChange={handleChangeDatePicker}
             />
-            {formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? (
+            {/* {formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? (
               <div className="text-red-500">{formik.errors.ngayKhoiChieu}</div>
-            ) : null}
+            ) : null} */}
           </Form.Item>
           <Form.Item label="Đang chiếu" valuePropName="checked">
             <Switch
@@ -230,7 +218,7 @@ export const EditFilm = () => {
           <Form.Item label="Rates">
             <InputNumber
               min={1}
-              max={5}
+              max={10}
               value={formik.values.danhGia}
               onChange={(value) => formik.setFieldValue("danhGia", value)}
             />
@@ -247,7 +235,11 @@ export const EditFilm = () => {
             {formik.errors.hinhAnh && formik.touched.hinhAnh ? (
               <div className="text-red-500">{formik.errors.hinhAnh}</div>
             ) : null}
-            <img src={imgSrc} alt="Preview" />
+            <img
+              className="w-[120px] mt-[15px]"
+              src={imgSrc === "" ? thongTinPhim?.hinhAnh : imgSrc}
+              alt="Preview"
+            />
           </Form.Item>
           <Form.Item label="Tác Vụ">
             <button
@@ -258,7 +250,7 @@ export const EditFilm = () => {
               }}
               type="submit"
             >
-              Thêm Phim
+              Cập Nhật
             </button>
           </Form.Item>
         </Form>

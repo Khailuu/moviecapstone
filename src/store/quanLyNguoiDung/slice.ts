@@ -11,6 +11,7 @@ type QuanLyNguoiDungInitialState = {
     isFetchingRegister: boolean;
     isFetchingLogin: boolean;
     isFetchingUpload: boolean;
+    isFetchingPostNguoiDung: boolean;
     userLogin: UserLogin | undefined;
     cartList: Ghe[];
     userInfo: {};
@@ -22,6 +23,7 @@ const initialState: QuanLyNguoiDungInitialState = {
     isFetchingRegister: false,
     isFetchingLogin: false,
     isFetchingUpload: false,
+    isFetchingPostNguoiDung: false,
     userLogin: getUserLogin(),
     cartList: [] as Ghe[],
     userInfo: {},
@@ -87,6 +89,15 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction }
             })
             .addCase(quanLyNguoiDungActionThunks.uploadThunk.rejected, (state) => {
                 state.isFetchingUpload = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.postNguoiDung.pending, (state) => {
+                state.isFetchingPostNguoiDung = true;
+            })
+            .addCase(quanLyNguoiDungActionThunks.postNguoiDung.fulfilled, (state) => {
+                state.isFetchingPostNguoiDung = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.postNguoiDung.rejected, (state) => {
+                state.isFetchingPostNguoiDung = false;
             })
     }
 });

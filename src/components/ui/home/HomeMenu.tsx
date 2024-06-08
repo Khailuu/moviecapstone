@@ -15,7 +15,6 @@ export const HomeMenu = () => {
   const tabPosition: TabPosition = isMobile ? "top" : "left";
 
   const handleItemClick = (maLichChieu?: number) => {
-    console.log("maLichChieu", maLichChieu);
     useGetMaLichChieu(maLichChieu);
   };
 

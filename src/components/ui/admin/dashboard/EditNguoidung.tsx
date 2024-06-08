@@ -29,11 +29,7 @@ export const EditNguoidung = () => {
     
     const { isFetchingRegister } = useSelector((state: RootState) => state.quanLyNguoiDung);
     
-    console.log('taiKhoan:', taiKhoan);
-    
     const { data: thongTinTK } = taiKhoan ? useGetTimKiemNguoiDung(taiKhoan) : { data: null };
-
-    console.log(thongTinTK);
 
     const {
         handleSubmit,
@@ -58,7 +54,6 @@ export const EditNguoidung = () => {
     }, [thongTinTK, setValue]);
 
     const onSubmit: SubmitHandler<Update> = (values) => {
-        console.log(values);
         dispatch(quanLyNguoiDungActionThunks.postUpdateNguoiDungThunk(values))
             .unwrap()
             .then(() => {
@@ -163,7 +158,7 @@ export const EditNguoidung = () => {
                 )}
 
                 <Button className="col-6" htmlType="submit" type="primary" size="large" loading={isFetchingRegister}>
-                    Register
+                    Cập Nhật
                 </Button>
             </form>
         </div>

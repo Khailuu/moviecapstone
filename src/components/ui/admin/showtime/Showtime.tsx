@@ -66,7 +66,6 @@ export const Showtime = () => {
       giaVe: 0,
     },
     onSubmit: (values: LichChieu) => {
-      console.log(values)
       mutation.mutate(values, {
         onSuccess: () => {
           navigate(PATH.films)

@@ -3,8 +3,6 @@ import { Fragment } from "react/jsx-runtime";
 
 export const KetQuaDatVe = () => {
   const { data: infoList } = useGetUserInfo();
-  console.log(infoList)
-
   // Debugging log to check the structure of infoList
   // Ensure infoList is an array before mapping
 

@@ -14,9 +14,12 @@ export const quanLyPhimServices = {
         return api.get<HttpResponse<Phim[]>>(`/LayDanhSachPhim?maNhom=GP03`)
     },
     getBannerList: () => api.get<HttpResponse<Banner[]>>('/LayDanhSachBanner'),
-    getThongTinPhim: (maPhim: number) => api.get<HttpResponse<Phim>>(`LayThongTinPhim?MaPhim=${maPhim}`),
+    getThongTinPhim: (maPhim: number) => api.get<HttpResponse<Phim>>(`/LayThongTinPhim?MaPhim=${maPhim}`),
     deletePhim: (maPhim: number) => api.delete(`/XoaPhim?=${maPhim}`),
     uploadPhim: (formGroup: FormData) => {
-        return api.post<HttpResponse<FormData[]>>('ThemPhimUploadHinh', formGroup)
+        return api.post<HttpResponse<FormData[]>>('/ThemPhimUploadHinh', formGroup)
+    },
+    editPhim: (formGroup: FormData) => {
+        return api.post<HttpResponse<FormData[]>>('/CapNhatPhimUpload', formGroup)
     }
 }

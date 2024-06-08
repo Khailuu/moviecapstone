@@ -1,5 +1,5 @@
 import { useGetDanhSachNguoiDung } from "hooks/api/useGetDanhSachNguoiDung";
-import { Input, Table } from 'antd';
+import { Button, Input, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
@@ -115,6 +115,16 @@ export const DashBoard = () => {
   
   return (
     <div>
+      <h3
+        style={{
+          color: "#90c63f",
+          fontSize: 30,
+          fontWeight: "bold",
+          marginBottom: 30,
+        }}
+      >
+        Quản lý người dùng
+      </h3>
       <Search
         placeholder="input search text"
         allowClear
@@ -123,6 +133,11 @@ export const DashBoard = () => {
         onKeyUp={onKeyUp}
         className="mb-[20px]"
       />
+      <NavLink to={PATH.addNguoiDung}>
+        <Button className="!text-[#90c63f] mb-[30px]">
+          Thêm Người Dùng
+        </Button>
+      </NavLink>
       <Table columns={columns} dataSource={data} onChange={onChange} />
     </div>
   );

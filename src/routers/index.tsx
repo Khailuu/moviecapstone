@@ -9,6 +9,7 @@ import { Showtime } from 'components/ui/admin/showtime'
 import { KetQuaDatVe } from 'components/ui/datVe/KetQuaDatVe'
 import { EditNguoidung } from 'components/ui/admin/dashboard/EditNguoidung'
 import { EditFilm } from 'components/ui/admin/films/EditFilm'
+import { AddUser } from 'components/ui/admin/dashboard/AddUser'
 
 
 
@@ -66,6 +67,10 @@ const router: RouteObject[] = [
             {
                 path: PATH.dashboard,
                 element: <DashBoard />
+            },
+            {
+                path: PATH.addNguoiDung,
+                element: <AddUser />
             },
             {
                 path: `${PATH.editNguoiDung}/:taiKhoan`,

@@ -17,6 +17,7 @@ export const qlNguoiDungServices = {
     updateNguoiDung: (value: Update) => api.post<HttpResponse<Update>>('/CapNhatThongTinNguoiDung',value),
     getHistoryBooking : ()=> api.post<HttpResponse<HistoRyBooking>>("/ThongTinLichSuMuaVe"),
     deleteNguoiDung: (taiKhoan: string) => api.delete(`/XoaNguoiDung?TaiKhoan=${taiKhoan}`),
+    postNguoiDung: (payload: RegisterType) => api.post('/ThemNguoiDung', payload)
 }
 
 

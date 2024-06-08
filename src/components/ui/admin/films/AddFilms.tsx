@@ -68,13 +68,7 @@ export const AddFilms = () => {
   const mutation = useUploadPhim();
 
   const handleChangeDatePicker = (value: any) => {
-    console.log(value)
-    console.log(value.format("DD/MM/YYYY"))
     formik.setFieldValue("ngayKhoiChieu", value.format("DD/MM/YYYY"))
-    // console.log(value)
-    // const date = value.format("DD/MM/YYYY");
-    // console.log("date: ",date)
-    // formik.setFieldValue("ngayKhoiChieu", date);
   };
 
   const formik = useFormik<FormValues>({
@@ -92,7 +86,6 @@ export const AddFilms = () => {
     },
     validationSchema: addFilmSchema,
     onSubmit: (values: FormValues) => {
-      console.log(values)
       const formData = new FormData();
       formData.append('tenPhim', values.tenPhim);
       formData.append('trailer', values.trailer);
@@ -107,7 +100,7 @@ export const AddFilms = () => {
       if (values.hinhAnh) {
         formData.append('hinhAnh', values.hinhAnh, values.hinhAnh.name);
       }
-      
+      console.log(formData)
       mutation.mutate(formData, {
         onSuccess: () => {
           toast.success("Thêm phim thành công!");

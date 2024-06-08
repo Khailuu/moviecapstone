@@ -9,6 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "proxy": "https://movienew.cybersoft.edu.vn/api",
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@hookform/resolvers": "^3.3.4",

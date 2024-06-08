@@ -82,3 +82,16 @@ export const getHistoryBookingThunk = createAsyncThunk(
         }
     }
 )
+
+export const postNguoiDung = createAsyncThunk(
+    "quanLyNguoiDung/themNguoiDung",
+    async(payload: RegisterType, {rejectWithValue}) => {
+        try {
+            const res = await qlNguoiDungServices.postNguoiDung(payload)
+            console.log(res)
+        }
+        catch (err) {
+            return rejectWithValue(err)
+        }
+    }
+)
