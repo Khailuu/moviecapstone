@@ -6,7 +6,10 @@ export const PATH = {
     movieDetail: '/movie/:movieId',
     admin: '/admin', 
     dashboard: '/admin/dashboard',
+    addNguoiDung: '/admin/dashboard/addnguoidung',
+    editNguoiDung: '/admin/dashboard/editnguoidung',
     films: '/admin/films',
+    editfilm: '/admin/films/editfilm',
     addFilms: '/admin/films/addfilms',
     showtime: '/admin/showtime',
     ketquadatve: '/datve/ketquadatve'

@@ -6,14 +6,17 @@ import { Ghe, Update, UserLogin } from "types";
 import { getAccessToken } from "utils/getAccessToken";
 
 type QuanLyNguoiDungInitialState = {
+
   accessToken: string | undefined;
   isFetchingRegister: boolean;
   isFetchingLogin: boolean;
   isFetchingUpload: boolean;
+  isFetchingPostNguoiDung: boolean;
   userLogin: UserLogin | undefined;
   cartList: Ghe[];  
   userInfo: {};
   update?: Update[];
+  historyBooking: HistoRyBooking[] | undefined;
 };
 
 const initialState: QuanLyNguoiDungInitialState = {
@@ -21,11 +24,14 @@ const initialState: QuanLyNguoiDungInitialState = {
   isFetchingRegister: false,
   isFetchingLogin: false,
   isFetchingUpload: false,
+  isFetchingPostNguoiDung: false,
   userLogin: getUserLogin(),
   cartList: [] as Ghe[],
   userInfo: {},
   update: [] as Update[],
+  historyBooking: undefined,
 };
+
 
 export const {
   reducer: quanLyNguoiDungReducer,
@@ -61,39 +67,45 @@ export const {
     },
   },
 
-  extraReducers: (builder) => {
-    builder
-      .addCase(quanLyNguoiDungActionThunks.registerThunk.pending, (state) => {
-        state.isFetchingRegister = true;
-      })
-      .addCase(quanLyNguoiDungActionThunks.registerThunk.fulfilled, (state) => {
-        state.isFetchingRegister = false;
-      })
-      .addCase(quanLyNguoiDungActionThunks.registerThunk.rejected, (state) => {
-        state.isFetchingRegister = false;
-      })
-      .addCase(quanLyNguoiDungActionThunks.loginThunk.pending, (state) => {
-        state.isFetchingLogin = true;
-      })
-      .addCase(
-        quanLyNguoiDungActionThunks.loginThunk.fulfilled,
-        (state, { payload }) => {
-          state.isFetchingLogin = false;
-          localStorage.setItem(LOCAL_USER_LOGIN_KEY, JSON.stringify(payload));
-          state.userLogin = payload;
-        }
-      )
-      .addCase(quanLyNguoiDungActionThunks.loginThunk.rejected, (state) => {
-        state.isFetchingLogin = false;
-      })
-      .addCase(quanLyNguoiDungActionThunks.uploadThunk.pending, (state) => {
-        state.isFetchingUpload = true;
-      })
-      .addCase(quanLyNguoiDungActionThunks.uploadThunk.fulfilled, (state) => {
-        state.isFetchingUpload = false;
-      })
-      .addCase(quanLyNguoiDungActionThunks.uploadThunk.rejected, (state) => {
-        state.isFetchingUpload = false;
-      });
-  },
+    extraReducers: (builder) => {
+        builder
+            .addCase(quanLyNguoiDungActionThunks.registerThunk.pending, (state) => {
+                state.isFetchingRegister = true;
+            })
+            .addCase(quanLyNguoiDungActionThunks.registerThunk.fulfilled, (state) => {
+                state.isFetchingRegister = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.registerThunk.rejected, (state) => {
+                state.isFetchingRegister = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.loginThunk.pending, (state) => {
+                state.isFetchingLogin = true;
+            })
+            .addCase(quanLyNguoiDungActionThunks.loginThunk.fulfilled, (state, { payload }) => {
+                state.isFetchingLogin = false;
+                localStorage.setItem(LOCAL_USER_LOGIN_KEY, JSON.stringify(payload));
+                state.userLogin = payload;
+            })
+            .addCase(quanLyNguoiDungActionThunks.loginThunk.rejected, (state) => {
+                state.isFetchingLogin = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.uploadThunk.pending, (state) => {
+                state.isFetchingUpload = true;
+            })
+            .addCase(quanLyNguoiDungActionThunks.uploadThunk.fulfilled, (state) => {
+                state.isFetchingUpload = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.uploadThunk.rejected, (state) => {
+                state.isFetchingUpload = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.postNguoiDung.pending, (state) => {
+                state.isFetchingPostNguoiDung = true;
+            })
+            .addCase(quanLyNguoiDungActionThunks.postNguoiDung.fulfilled, (state) => {
+                state.isFetchingPostNguoiDung = false;
+            })
+            .addCase(quanLyNguoiDungActionThunks.postNguoiDung.rejected, (state) => {
+                state.isFetchingPostNguoiDung = false;
+            })
+    }
 });

@@ -12,9 +12,12 @@ export const qlNguoiDungServices = {
     dangNhap: (payload: LoginType) => api.post<HttpResponse<UserLogin>>('/DangNhap', payload),
     getDanhSachNguoiDung: () => api.get<HttpResponse<TaiKhoan>>('/LayDanhSachNguoiDung?MaNhom=GP03'),
     getUserInfo : () => api.post<HttpResponse<UserInfo>>('/ThongTinTaiKhoan'),
+    getTimKiemNguoiDung: (payload: string) => api.get<HttpResponse<TaiKhoan>>(`/TimKiemNguoiDung?MaNhom=GP03&tuKhoa=${payload}`),
     updateAccount: (value: Update) => api.put<HttpResponse<Update>>('/CapNhatThongTinNguoiDung',value),
+    updateNguoiDung: (value: Update) => api.post<HttpResponse<Update>>('/CapNhatThongTinNguoiDung',value),
     getHistoryBooking : ()=> api.post<HttpResponse<HistoRyBooking>>("/ThongTinLichSuMuaVe"),
-    deleteNguoiDung: (taiKhoan: string) => api.delete(`/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+    deleteNguoiDung: (taiKhoan: string) => api.delete(`/XoaNguoiDung?TaiKhoan=${taiKhoan}`),
+    postNguoiDung: (payload: RegisterType) => api.post('/ThemNguoiDung', payload)
 }
 
 

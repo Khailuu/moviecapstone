@@ -6,7 +6,6 @@ import { useGetLichChieuHeThongRap } from "hooks/api";
 import { CumRap, TaoLichChieu } from "types";
 import { quanLyRapServices } from "services";
 import { useFormik } from "formik";
-import moment from "moment";
 import type { DatePickerProps, GetProps } from 'antd';
 import { usePostLichChieu } from "hooks/api/usePostLichChieu";
 import { PATH } from "constant";
@@ -84,7 +83,7 @@ export const Showtime = () => {
   };
 
   const handleChangeDatePicker = (value: any) => {
-    const date = moment(value).format("DD/MM/YYYY hh:mm:ss")
+    const date = value.format("DD/MM/YYYY hh:mm:ss")
     formik.setFieldValue("ngayChieuGioChieu", date)
   }
   const handleChangeCumRap = (value: string) => {

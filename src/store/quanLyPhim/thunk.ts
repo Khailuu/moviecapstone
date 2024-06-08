@@ -34,3 +34,16 @@ export const getBannerListThunk = createAsyncThunk(
         }
     }
 )
+
+export const editMovieThunk = createAsyncThunk(
+    "quanLyPhim/CapNhatPhimUpload",
+    async(payload: FormData, {rejectWithValue}) => {
+        try {
+            const response = await quanLyPhimServices.editPhim(payload)
+            console.log(response)
+            return response.data.content
+        }catch(err) {
+            return rejectWithValue(err)
+        }
+    }
+)

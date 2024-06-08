@@ -11,7 +11,6 @@ const contentStyle: React.CSSProperties = {
 
 export const HomeCarousel = () => {
   const { data: bannerList } = useGetBannerList();
-  // console.log(bannerList);
   return (
     <Carousel effect="fade" className="relative">
       {bannerList?.map((banner, index) => {

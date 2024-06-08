@@ -1,10 +1,10 @@
 import { Card, Skeleton } from "antd";
-import { useGetPhimList } from "hooks/api";
 import { useState } from "react";
 import Slider from "react-slick";
 import '../../assets/button.css'
 import { generatePath, useNavigate } from "react-router-dom";
 import { PATH } from "constant";
+import { useGetMovieList } from "hooks/api/useGetMovieList";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -42,7 +42,7 @@ export const Hometemplate = () => {
     setActiveButton('upcoming')
   };
   
-  const { data: phimList, isFetching: isFetchingPhimList } = useGetPhimList();
+  const { data: phimList, isFetching: isFetchingPhimList } = useGetMovieList();
   const filteredPhimList = phimList?.filter(phim => {
     if (isShowingNow) {
       return phim.dangChieu === true

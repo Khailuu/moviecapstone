@@ -3,7 +3,7 @@ import { DesktopOutlined, FileOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { LOCAL_USER_LOGIN_KEY, PATH } from "constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { quanLyNguoiDungAction } from "store/quanLyNguoiDung/slice";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -18,6 +18,8 @@ export const AdminTemplate = () => {
   const {
     token: { colorBgContainer = '#fff', borderRadiusLG = '4px' } = {}
   } = themeToken || {};
+
+  const { userLogin } = useSelector((state: any) => state.quanLyNguoiDung)
 
   const removeUserLogin = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY);
@@ -38,8 +40,14 @@ export const AdminTemplate = () => {
     setSelectedKeys(getSelectedKeys(location.pathname));
   }, [location.pathname]);
 
+  if(userLogin?.maLoaiNguoiDung === "KhachHang") {
+    navigate("/")
+  }
+
   return (
-    <Layout style={{ minHeight: "100vh" }}> 
+    <Layout style={{
+      minHeight: "100vh",
+    }}> 
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
@@ -74,11 +82,15 @@ export const AdminTemplate = () => {
             </Button>
           </div>
         </Header>
-        <Content>
+        <Content
+          style={{
+            margin: "16px",
+          }}
+        >
           <div
             style={{
-              margin: 20,
               padding: 24,
+              minHeight: 360,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}

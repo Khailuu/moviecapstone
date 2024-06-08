@@ -2,7 +2,7 @@ import { Tabs } from "antd";
 import { useGetLichChieuHeThongRap } from "hooks/api/useGetLichChieuHeThongRap";
 import "../../../assets/custom.css";
 import moment from "moment";
-import { NavLink } from "react-router-dom";
+import { NavLink, generatePath } from "react-router-dom";
 import { PATH } from "constant";
 import { useGetMaLichChieu } from "hooks/api";
 import { useMediaQuery } from "react-responsive";
@@ -15,7 +15,6 @@ export const HomeMenu = () => {
   const tabPosition: TabPosition = isMobile ? "top" : "left";
 
   const handleItemClick = (maLichChieu?: number) => {
-    console.log("maLichChieu", maLichChieu);
     useGetMaLichChieu(maLichChieu);
   };
 
@@ -69,7 +68,7 @@ export const HomeMenu = () => {
                             />
                             <div className={isMobile ? "" : "ml-[15px]"}>
                               <NavLink
-                                to={'/datve'}
+                                to={generatePath(PATH.movieDetail, { movieId: phim.maPhim })}
                                 className="!text-[#6bb140]"
                                 style={{ fontSize: isMobile ? 18 : 24, fontWeight: "bold" }}
                               >

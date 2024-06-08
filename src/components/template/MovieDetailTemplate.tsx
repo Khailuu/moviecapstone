@@ -40,7 +40,7 @@ export const MovieDetailTemplate = () => {
                     return (
                         <div className="grid grid-cols-8 gap-10" key={key}>
                             <Link
-                                to={accessToken ? path : PATH.login}
+                                to={accessToken ? path : `${PATH.datVe}/${z.maLichChieu}`}
                                 key={z.maLichChieu}
                                 className="text-center border border-gray-400 p-1 cursor-pointer hover:border-black transition shadow-xl rounded-10 !text-gray-600"
                             >

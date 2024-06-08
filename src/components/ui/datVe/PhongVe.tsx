@@ -41,7 +41,7 @@ export const PhongVe = () => {
   }
 
   if (!list) {
-    return <div>Đang tải...</div>;
+    return <div className="text-white">Đang tải...</div>;
   }
 
   cartList.forEach((item) => {
@@ -58,8 +58,8 @@ export const PhongVe = () => {
 
   return (
     <div className="container mx-auto my-[80px]">
-      <div className="grid grid-cols-12">
-        <div className="col-span-8">
+      <div className="grid grid-cols-12 gap-[30px]">
+        <div className="xl:col-span-8 lg:col-span-8 md:col-span-12 sm:col-span-12 col-span-12">
           <div className={style.container}>
             <div
               style={{ width: "80%", height: 15, backgroundColor: "white" }}
@@ -89,7 +89,7 @@ export const PhongVe = () => {
                     className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDD} ${classGheDuocMinhDat}`}
                     key={i}
                   >
-                    {ghe.daDat ? <CloseOutlined /> : ghe.stt}
+                    {(ghe.daDat ? <CloseOutlined /> : ghe.stt)}
                   </button>
                 );
               })}
@@ -118,7 +118,7 @@ export const PhongVe = () => {
             </table>
           </div>
         </div>
-        <div className="col-span-3 col-start-10 text-white sticky-top-80">
+        <div className="xl:col-span-3 lg:col-span-3 md:col-span-12 sm:col-span-12 col-span-12 text-white sticky-top-80">
           <h3 className="text-[#90c63f] text-center text-[32px] mb-[15px]">
             Tổng cộng: {totalPrice.toLocaleString("vi-VN")} đ
           </h3>

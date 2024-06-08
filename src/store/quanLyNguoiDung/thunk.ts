@@ -44,6 +44,17 @@ export const putUpdateInfoThunk = createAsyncThunk(
         }
     }
 )
+export const postUpdateNguoiDungThunk = createAsyncThunk(
+    "quanLyNguoiDung/putUpdateInfo",
+    async(payload : Update, {rejectWithValue}) => {
+        try {
+            const data = await qlNguoiDungServices.updateNguoiDung(payload)
+            return data.data.content
+        } catch(err) {
+            return rejectWithValue(err)
+        }
+    }
+)
 
 export const uploadThunk = createAsyncThunk('ThemPhimUploadHinh',
 async (payload: FormData, {rejectWithValue}) => {
@@ -67,6 +78,19 @@ export const getHistoryBookingThunk = createAsyncThunk(
                 return data.data.content
             }
         } catch(err) {
+            return rejectWithValue(err)
+        }
+    }
+)
+
+export const postNguoiDung = createAsyncThunk(
+    "quanLyNguoiDung/themNguoiDung",
+    async(payload: RegisterType, {rejectWithValue}) => {
+        try {
+            const res = await qlNguoiDungServices.postNguoiDung(payload)
+            console.log(res)
+        }
+        catch (err) {
             return rejectWithValue(err)
         }
     }
