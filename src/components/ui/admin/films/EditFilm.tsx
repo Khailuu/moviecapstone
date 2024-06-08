@@ -127,11 +127,11 @@ export const EditFilm = () => {
       // })
       mutation.mutate(formData, {
         onSuccess: () => {
-          toast.success("Thêm phim thành công!");
+          toast.success("Cập nhật phim thành công!");
           navigate(PATH.films);
         },
         onError: () => {
-          toast.error("Thêm phim không thành công!");
+          toast.error("Cập nhật phim không thành công!");
         }
       });
     },
