@@ -75,8 +75,8 @@ export const EditNguoidung = () => {
                 <div key={thongTin.taiKhoan}>Cập nhật thông tin cho tài khoản: <b>{thongTin.taiKhoan}</b></div>
             ))}
             <form onSubmit={handleSubmit(onSubmit)}>
-                <h1 className="text-[#72be43] text-4xl font-[600] mb-[30px]">Register</h1>
-                <div className="text-white mb-[6px] fw-bold">Full Name</div>
+                <h1 className="text-[#72be43] text-4xl font-[600] mb-[30px]">Cập Nhật</h1>
+                <div className="text-black mb-[6px] fw-bold">Full Name</div>
                 <Controller
                     control={control}
                     name="hoTen"
@@ -87,7 +87,7 @@ export const EditNguoidung = () => {
                 {errors?.hoTen && (
                     <p className="text-[red] text-[12px]">{errors.hoTen?.message}</p>
                 )}
-                <div className="text-white mb-[6px] fw-bold">User Name</div>
+                <div className="text-black mb-[6px] fw-bold">User Name</div>
                 <Controller
                     control={control}
                     name="taiKhoan"
@@ -98,7 +98,7 @@ export const EditNguoidung = () => {
                 {errors?.taiKhoan && (
                     <p className="text-[red] text-[12px]">{errors.taiKhoan?.message}</p>
                 )}
-                <div className="text-white mb-[6px] fw-bold">Password</div>
+                <div className="text-black mb-[6px] fw-bold">Password</div>
                 <Controller
                     control={control}
                     name="matKhau"
@@ -113,7 +113,7 @@ export const EditNguoidung = () => {
                 {errors?.matKhau && (
                     <p className="text-[red] text-[12px]">{errors.matKhau?.message}</p>
                 )}
-                <div className="text-white mb-[6px] fw-bold">Email</div>
+                <div className="text-black mb-[6px] fw-bold">Email</div>
                 <Controller
                     control={control}
                     name="email"
@@ -124,7 +124,7 @@ export const EditNguoidung = () => {
                 {errors?.email && (
                     <p className="text-[red] text-[12px]">{errors.email?.message}</p>
                 )}
-                <div className="text-white mb-[6px] fw-bold">Phone</div>
+                <div className="text-black mb-[6px] fw-bold">Phone</div>
                 <Controller
                     control={control}
                     name="soDt"
@@ -135,7 +135,7 @@ export const EditNguoidung = () => {
                 {errors?.soDt && (
                     <p className="text-[red] text-[12px]">{errors.soDt?.message}</p>
                 )}
-                <div className="text-white mb-[6px] fw-bold">Group</div>
+                <div className="text-black mb-[6px] fw-bold">Group</div>
                 <Controller
                     control={control}
                     name="maNhom"
